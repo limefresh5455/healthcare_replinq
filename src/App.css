@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
+
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+p{
+  font-size: 16px;
+  font-weight: normal;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.a-g-link{
+  color: #e48a6a;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+.a-g-link:hover{
+  color: #2b2e49;
+  text-decoration: none;
+}
+a.nav-link.active {
+  color: #e48a6a;
+}
+a.nav-link:hover {
+  color: #e48a6a;
+}
+a.nav-link {
+  color:#c0c1c2;
+  padding:.5rem 1.5rem !important;
+}
+.navbar-toggler-icon {
+  border-bottom: solid 1px #000 !important;
+  display: block !important;
+  height: 7px !important;
+}
+
+
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(180deg, #e59071, #e38664);
+  border-color: #e28665;
+}
+.btn-primary:hover {
+  color: #fff;
+  background: linear-gradient(180deg, #e38664, #e59071);
+  border-color: #e28665;
+}
+.btn-check:focus+.btn, .btn:focus{
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+
+
+@media (max-width: 767px) {
+  .modal.loginM .modal-dialog{
+    max-width: 100% !important;
+    }
+    a.nav-link {
+    padding: 0 !important;
+  }
+  .aboutright {
+    padding-left: 0;    
+  }
+  .testimonailbox {
+    margin-bottom: 60px;
+  }
+  .herobtmstrip {
+    height: 60px;
+  }
+
+  .rightpane {
+    position: relative;
+    margin-left: 12px !important;    
+    margin-right: 0 !important;
+  }
+  .offcanvas-start {
+    width: 260px !important;
+  }
+  button.btn-close {
+    color: #fff !important;
+   
+    font-size: 24px;
+    position: absolute;
+    right: 4px;
+    z-index: 2;
+    top: 15px;
+    
+  }
+  .mbutton {
+    float: left;
+    background: none;
+    border: none;
+    color: #000;
+    padding: 6px;
+    margin: 0 15px 0 0px;
+  }
+  .leftmenuwrap h4 {
+    flex-direction: row !important;
+    gap: 15px;
+  }
+  .leftmenuwrap {
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-direction: column;
+  }
+  input.searchbx {
+    width: 80px !important;
+  }
+
+  .navbar-nav {
+    gap: 15px;
+    }
+    .phyaddprfile {
+      padding: 20px 30px;
+  }
+  .upschedulebox{
+    margin: 0;
+  }
+  .aboutright {
+    padding-left: 0 !important;
+  }
+  .testheading p, .testheading{width: 100% !important; 
+  }
+  .navbar>.container, .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl {
+   justify-content: flex-end;
+  }
+  .navbar-brand{
+    margin-right:auto;
+  }
+
+  .navbar button.btn {
+    position: absolute;
+    top: 10px;
+    right: 70px;
+  }
+  .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+  }
+
+}
+
+@media (min-width: 767px) {
+.offcanvas-start {   
+    transform: inherit;
+    visibility: visible !important;
+}
+.offcanvas-header .btn-close {
+  display: none;
+  }
+
+}

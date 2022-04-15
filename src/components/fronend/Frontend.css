@@ -1,0 +1,466 @@
+.heroBanner {
+    background: linear-gradient(90deg, #3e415c, #4f516b);
+    padding: 50px 0 1px 0;
+    position: relative;
+  }
+  .heroBanner h1 {
+    color: #fff;
+    text-align: left;
+    font-size: 38px;
+  }
+  .heroBanner h2 {
+    text-align: left;
+    color: #fff;
+    padding: 20px 0 30px 0;
+    font-weight: 400;
+    font-size: 24px;
+  }
+  .heroBanner:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    content: '';
+    /* top: 319px;
+    bottom: 0; */
+    
+    background-position: center;
+    background-size: cover;
+    height: 150px;
+    width: 100%;
+  }
+  
+  
+  
+  
+  .loginM .modal-dialog {
+    max-width: 60% !important;
+    margin-top: 6% !important;
+  }
+  .loginM .modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .loginM .modal-body {
+    padding: 0;
+    text-align: left;
+  }
+  .formWrap {
+    padding: 30px 50px 30px 20px;
+  }
+  .formWrap h2 {
+    font-size: 22px !important;
+    margin: 10px 0 40px 0;
+    color: #000 !important;
+  }
+  span.weback {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .formWrap input.btn.btn-primary {
+    width: 100%;
+  }
+  .float-right {
+    float: right;
+  }
+  a.text-underline {
+    color: #e28563 !important;
+    text-decoration: underline !important;
+  }
+  .formWrap a {
+    color: #747474;
+    text-decoration: none;
+  }
+  button.btn-close.loginmdl {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    right: 10px;
+    width: 5px;
+    height: 5px;
+  }
+  
+  img.leftImg {
+    width: 100%;
+    min-width: 394px;
+  }
+  form {
+    position: relative;
+  }
+  span.inpicrgt {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+  }
+  span.inpicrgt {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    color: #707070;
+  }
+  span.inpicrgtpws{
+    position: absolute;
+    right: 7px;
+    top: 70px;
+    color: #707070;
+  }
+  span.inpicrgtcomp{
+    position: absolute;
+    right: 7px;
+    top: 195px;
+    color: #707070;
+  }
+  span.inpicrgteye{
+    position: absolute;
+    right: 7px;
+    top: 131px;
+    color: #707070;
+  }
+  .formWrap.frmregistr span.weback {
+    margin-bottom: 15px;
+    display: block;
+  }
+  .formWrap.frmregistr h2 {
+    padding: 10px 0;
+    text-align: center;
+    margin: 0;
+  }
+  .formWrap.frmregistr {
+    padding: 15px 50px 0 20px;
+    text-align: center;
+  }  
+  
+  
+  
+  .herosection{
+    background: #3e415c;
+  }
+  .herobtmstrip {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 170px;
+  }
+
+  
+/* Mid Content Css */
+.w-80 {
+    width: 80%!important;
+  }
+  section.midwrap {
+    position: relative;
+    margin: 70px 0 60px 0;
+  }
+  .aboutright {
+    text-align: left;
+  }
+  .aboutright h2 {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .aboutright h2:after {
+    position: absolute;
+    background: #b8dbd2;
+    content: '';
+    height: 3px;
+    width: 50px;
+    left: 0;
+    bottom: -5px;
+  }
+  .aboutright ul{
+    padding: 0 0;
+    list-style: none;
+    margin-top: 20px;
+  }
+  .aboutright ul li {
+    padding: 15px 0 15px 50px;
+    position: relative;
+  }
+  .aboutright ul li:before {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    content: '\f00c';
+    background: #b8dbd2;
+    border: solid 2px #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+    font-family: FontAwesome;
+  }
+  .aboutright ul li:after {
+    position: absolute;
+    left: -1px;
+    top: 19px;
+    content: '';
+    border: solid 2px #b8dbd2;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .rightbox {
+    margin-top: 40px;
+    position: relative;
+  }
+  .rightbox h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  .rightbox:after {
+    position: absolute;
+    right: -42px;
+    bottom: 40px;
+    /* background: url(../public/images/dotstrip.png); */
+    content: '';
+    width: 33px;
+    height: 45px;
+    background-repeat: no-repeat;
+  }
+  
+  .r-box1 img, .l-box1 img {
+    width: 150px;
+  }
+  
+  .l-box1 { 
+    border-radius: 15px;
+    box-shadow: 4px 2px 14px 0px #ccc;
+    margin-bottom: 40px;
+    min-height: 215px;
+    padding: 20px;      
+      text-align: center;
+  }
+  .r-box1 {
+    border-radius: 15px;
+    box-shadow: 4px 2px 14px 0px #ccc;
+    margin-bottom: 40px;
+    min-height: 215px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  .aboutright {
+    padding-left: 80px;
+    padding-bottom: 40px;
+  }
+  .leftbox h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  
+  
+  .testimonialsec {
+    background: #f4f1de;
+    border-radius: 3px;
+    padding: 30px;
+    border: solid 1px #f9f8ee;
+    margin: 20px 0;
+  }
+  .testimonailbox.active span.quote {
+    position: relative;
+    top: -35px;
+  }
+  .testimonailbox.active {
+    padding: 60px;
+    margin-top: -30px;
+  }
+  .testimonailbox
+  {
+    border-radius: 15px;
+    box-shadow: 4px 2px 14px 0px #ccc;
+    min-height: 215px;
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+  }
+  
+  .profilesec {
+    display: flex;
+  }
+  span.profilepic img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  span.profilepic {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+  
+  .profName {
+    margin-left: 10px;
+    text-align: left;
+  }
+  .profName h5 {
+    font-size: 16px;
+    margin: 0;
+  }
+  .profName span {
+    font-size: 14px;
+    color:#acacac;
+  }
+  .testheading {
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 30px;
+  }
+  .testheading p {
+    padding: 20px 0 30px 0;
+    width: 70%;
+    margin: 0 auto;  
+  }
+  .testheading h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .testheading h2:before {
+    position: absolute;
+    background: #e59777;
+    content: '';
+    height: 3px;
+    width: 50px;
+    bottom: -5px;
+  }
+  span.quote img {
+    width: 22px;
+    position: relative;
+    top: -2px;
+    left: 0px;
+  }
+  .testimonailbox p {
+    padding: 30px 0;
+  }
+  span.quote {
+    width: 40px;
+    background: #b8dbd2;
+    padding: 10px;
+    border-radius: 12px;
+    height: 40px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .footersec {
+    background: linear-gradient(90deg, #3e415c, #4f516a);
+    padding: 50px 0 20px 0;
+    position: relative;
+    
+  }
+  
+  .footersec h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+    color: #fff;
+  }
+  .footersec h6 {  
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+    font-size: 16px;
+    color: #fff;
+  }
+  .footersec h2:before {
+    position: absolute;
+    background: #bbc7ca;
+    content: '';
+    height: 3px;
+    width: 50px;
+    bottom: -5px;
+  }
+  img.aboutstrip {
+    position: absolute;
+    top: 218px;
+    bottom: 0;
+    width: 33px !important;
+    right: -49px;
+  }
+  
+  /* calendar css  */
+  .demo-app-main {
+    margin: 38px 35px 30px 170px;
+  }
+  .avatarwrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+ }
+ .avname {
+    width: 165px;
+    height: 165px;
+    border: solid 3px #45C5AF;
+    border-radius: 50%;
+    text-align: center;
+    background: #EFFFFC;
+    position: relative;
+ }
+ .avname1 {
+  width: 70px;
+  height: 70px;
+  margin-top: 30px;
+    margin-left: 52px;
+  border: solid 3px #FFA050;
+  border-radius: 50%;
+  text-align: center;
+  background: #FFF2E6;
+  position: relative;
+}
+.avname1 h2 {
+  font-size: 20px;
+    color: #FFA050;
+    padding: 23px 0;
+    margin: 0px;
+}
+ .avname h2 {
+    font-size: 68px;
+    color: #45C5AF;
+    padding: 40px 0;
+    margin: 0;
+ }
+ span.avedit {
+    width: 36px;
+    height: 36px;
+    display: block;
+    border: solid 1px #ccc;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    background: #fff;
+ 
+ }
+ span.avedit .fa {
+    color: #E07A55;
+    padding: 10px 0;
+    text-align: center;
+ }
+/* schedule css */
+.warningIcon i {
+  color: #B3261E;
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+ 
+/* testimonials slider css */
+
+.owl-carousel .owl-item .items {
+  padding: 80px 0;    
+}
+.owl-item.active.center {
+  transform: scale(1.3);
+  position: relative;
+  z-index: 2;
+  padding: 0 0px;
+  transition: all 0.6s;
+}
+.owl-carousel .owl-item .items {
+  padding: 80px 30px;
+}
