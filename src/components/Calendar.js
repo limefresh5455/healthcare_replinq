@@ -3,15 +3,13 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from '../events'
+// import { INITIAL_EVENTS, createEventId } from '../events'
 import AdminLeftMenu from './backend/AdminLeftMenu';
-import Schedule from './Schedule';
-import {Link} from 'react-router-dom';
+// import Schedule from './Schedule';
+// import {Link} from 'react-router-dom';
 
 let dts = [];
 let t = 0
-
-
 
 export default class Calendar extends React.Component {
 
@@ -42,13 +40,10 @@ export default class Calendar extends React.Component {
   }
   componentDidMount() {
     // localStorage.setItem('Name', {});
-   // 
-    http://127.0.0.1:8000/api/show
+   //http://127.0.0.1:8000/api/show
     fetch("https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Practitioner?family=physician&name=Smith", {
       method: "Get",
       headers: {
-
-
         'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6IkRrcnkycUI2ME5MYklyLTFOZ0w0RHFoYlZwLUtfS21oeEdabVhaWGpCT3lyNncySVI4SHh2VnYxQzJQOEpBYzNseEQ3WGFfNzJOZGxaSWdwaHh6T2Framt0TktMR0dWZlFOb1Y0OUpKWlh0czV0Nl9Id3otMkNRcTR6WVZwS1FUIiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2NDk5NDE2MzcsImlhdCI6MTY0OTkzODAzNywiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiNWM3MmM0MDMtNjRiNy00YmFiLWFmMGItZmQwNTc0NjA3ZTg4IiwibmJmIjoxNjQ5OTM4MDM3LCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.HUYyHJIpJfKgDPB6tl7ExOwBT3b4EKLHxE7KkXZ2qVL5QY0qwbL3GYG0aMXRxjWokbS-kQ-48w-tbsxGc7nLFqdpQt8qs_QotQRVJ5UPJNMPtOwYdyVZ8fmaAVeqpDSyCTxiTZULx11Ni-6vp0U0-wup9XZDjX47N3mCF7rLZnWUbqpbx72HrwH-WgqoD-lAZK0Ziw4xN_59Ltg6ifYBWp2MbIkJIErG7LZCwLhpWTlIWMdOojdB6cH0uYaXZoDiguATq1-MDly4MfxRqNj9atEBsN-o04YHgCr88JJ67GxO76YfekZykzcbCmYIHi048eal6AeqHuk4C_UCaTzILA',
         'Content-Type': ' application/json',
         'Accept': 'application/json+fhir',
@@ -62,7 +57,7 @@ export default class Calendar extends React.Component {
         let todayStr = new Date().toISOString().replace(/T.*$/, '')
         let k = 0
         t++
-        if (t==2)
+        if (t===2)
         {
           for (let i = 0; i < res.entry.length; i++) {
             for (let j = 0; j < res.entry[i].resource.name.length; j++) {
@@ -159,7 +154,7 @@ export default class Calendar extends React.Component {
 
 
   handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
+    // let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
 
     calendarApi.unselect() // clear date selection

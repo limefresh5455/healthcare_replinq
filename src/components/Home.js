@@ -1,5 +1,6 @@
 import React from 'react'
-import Testimonails from './fronend/Testimonials';
+// import Testimonails from './fronend/Testimonials';
+import { Link } from "react-router-dom";
 const Home = () => {
     return (
     
@@ -46,13 +47,13 @@ const Home = () => {
                    <div className='aboutright'>
                         <h2>About Us</h2>
                         <p>Every Surgical Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-                        <ul class="list-group aboulist">
+                        <ul className="list-group aboulist">
                         
                             <li>Cloud SoftwareEvery Surgical Lorem Ipsum is simply dummy text of the printing</li>
                             <li>Automated Every Surgical Lorem Ipsum is simply dummy</li>
                             <li>Our Problem Every Surgical Lorem Ipsum is simply dummy text of the printing Every Surgical Lorem Ipsum is simply dummy text of the printing</li>
                         </ul>
-                        <a href="#" class="btn btn-primary">Let's Get Started</a>
+                        <Link to="#" className="btn btn-primary">Let's Get Started</Link>
                     </div>
                 </div>  
               

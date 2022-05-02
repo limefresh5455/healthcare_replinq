@@ -42,9 +42,9 @@ const AdminLeftMenu = () => {
         </ul>
         <ul>
             <li>
-            <a href='#'>                
+            <Link to='#'>                
                 <h4><i className='fa fa-sign-out'></i> Logout</h4>
-                </a>
+                </Link>
             </li>
         </ul>  
           

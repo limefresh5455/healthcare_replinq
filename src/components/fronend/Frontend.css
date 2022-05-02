@@ -464,3 +464,10 @@
 .owl-carousel .owl-item .items {
   padding: 80px 30px;
 }
+
+.errorMessage{
+  position: absolute;
+  float: left;
+  color: red;
+  font-size: 14px;
+}

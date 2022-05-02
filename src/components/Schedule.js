@@ -1,7 +1,8 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
-import { useLocation } from 'react-router-dom';
-import {useParams} from "react-router-dom"
+// import { useLocation } from 'react-router-dom';
+// import {useParams} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Schedule =()=>{
   //  const location = useLocation();  
@@ -16,7 +17,7 @@ const Schedule =()=>{
 
  
 
-  const {info} = useParams()
+  // const {info} = useParams()
 
  
 
@@ -34,14 +35,14 @@ const Schedule =()=>{
             <div className="col-md-2 avatarwrap">
               <div className="avname">
                 <h2>SJ</h2>
-                <span className="avedit"> <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i className="fa fa-pencil"></i></a></span>
+                <span className="avedit"> <Link to='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i className="fa fa-pencil"></i></Link></span>
               </div>
               <h6>hii</h6>
             </div>
             <div className="col-md-2 avatarwrap">
               <div className="avname1">
                 <h2>AH</h2>
-                {/* <span class="avedit"> <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i class="fa fa-pencil"></i></a></span> */}
+                {/* <span className="avedit"> <Link to='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i className="fa fa-pencil"></i></Link></span> */}
               </div>
               {/* <h6 className='text-center'  for="disabledFieldsetCheck">Dr. Sarah Jonas</h6> */}
             </div>
@@ -54,8 +55,8 @@ const Schedule =()=>{
                       <div className='row'>
                         <div className='modalWrap'>
                           <div className='removehdr'>
-                            <a href='#' className='active'>Color</a>
-                            <a href='#'>Notifications</a>
+                            <Link to='#' className='active'>Color</Link>
+                            <Link to='#'>Notifications</Link>
                           </div>
                           <div className='addmodalbdy'>
                             <h4>Physician</h4>
@@ -69,37 +70,37 @@ const Schedule =()=>{
                               <h4>Color</h4>
                               <div className='selctClr'>
                                 <div>
-                                  <input id="radio-1" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-1" class="radio-custom-label rc1"></label>
+                                  <input id="radio-1" className="radio-custom" name="radio-group" type="radio" />
+                                  <label for="radio-1" className="radio-custom-label rc1"></label>
                                 </div>
                                 <div>
-                                  <input id="radio-2" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-2" class="radio-custom-label rc2"></label>
+                                  <input id="radio-2" className="radio-custom" name="radio-group" type="radio" />
+                                  <label for="radio-2" className="radio-custom-label rc2"></label>
                                 </div>
                                 <div>
-                                  <input id="radio-3" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-3" class="radio-custom-label rc3"></label>
+                                  <input id="radio-3" className="radio-custom" name="radio-group" type="radio" />
+                                  <label for="radio-3" className="radio-custom-label rc3"></label>
                                 </div>
 
                                 <div>
-                                  <input id="radio-4" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-4" class="radio-custom-label rc4"></label>
+                                  <input id="radio-4" className="radio-custom" name="radio-group" type="radio" />
+                                  <label for="radio-4" className="radio-custom-label rc4"></label>
                                 </div>
                                 <div>
-                                  <input id="radio-5" class="radio-custom" name="radio-group" type="radio" checked />
-                                  <label for="radio-5" class="radio-custom-label rc5"></label>
+                                  <input id="radio-5" className="radio-custom" name="radio-group" type="radio" checked />
+                                  <label for="radio-5" className="radio-custom-label rc5"></label>
                                 </div>
                                 <div>
-                                  <input id="radio-6" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-6" class="radio-custom-label rc6"></label>
+                                  <input id="radio-6" className="radio-custom" name="radio-group" type="radio" />
+                                  <label for="radio-6" className="radio-custom-label rc6"></label>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className='text-center'>
-                            <input type='button' class='btn btn-primary w-100' value='Update'></input>
+                            <input type='button' className='btn btn-primary w-100' value='Update'></input>
                             <span className='linebreak'>OR</span>
-                            <input type='button' class='btn btn-primary w-100 removebtn' value='Remove from Profile'></input>
+                            <input type='button' className='btn btn-primary w-100 removebtn' value='Remove from Profile'></input>
                           </div>
                         </div>
                       </div>
@@ -114,8 +115,8 @@ const Schedule =()=>{
                     <div className="yearbox" style={{ "background-color": "#F4F1DE", "border-bottom": "0px" }}>
                       <h2>Schedule</h2>
                       <h2 style={{ "color": "#e28563" }}>Nov, 11 2020</h2>
-                      <span><a href="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></a>
-                        <a href="#" className="text-black"><i className="fa fa-chevron-right"></i></a></span>
+                      <span><Link to="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></Link>
+                        <Link to="#" className="text-black"><i className="fa fa-chevron-right"></i></Link></span>
                     </div>
                     <div className="row align-items-center">
                       <div className="col-md-2"><p style={{ "margin-left": "20px" }}>8:00 AM</p></div>

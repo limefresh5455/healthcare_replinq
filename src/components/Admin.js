@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
-
+import { Link } from "react-router-dom";
 
 const Admin = () => {
     return (
@@ -15,7 +15,7 @@ const Admin = () => {
                     <div className="welcombox">
                         <div className="row align-items-center">
                             <div className="col-md-6">
-                                <h1 className="mt-4">Hey Racheal, Good Morning <img src="/images/sunimg.png"/></h1>
+                                <h1 className="mt-4">Hey Racheal, Good Morning <img src="/images/sunimg.png" alt=""/></h1>
                                 <h2>Welcome to your Replinq dashboard. View case insights below, edit your physicians and preview your next upcoming case.
                                 </h2>
                                 <h3>
@@ -23,7 +23,7 @@ const Admin = () => {
                                 </h3>
                             </div>
                             <div className="col-md-6 text-end">
-                                <img src="/images/welcomeImg.png"/>
+                                <img src="/images/welcomeImg.png" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -38,10 +38,10 @@ const Admin = () => {
                             <div className="schedule-boxleft">
                                 <div className="yearbox">
                                     <h2>My Physicians (5)</h2>
-                                    <span><a href="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></a>
-                                    <a href="#" className="text-black"><i className="fa fa-chevron-right"></i></a></span>
+                                    <span><Link to="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></Link>
+                                    <Link to="#" className="text-black"><i className="fa fa-chevron-right"></i></Link></span>
                                 </div>
-                                <img src="/images/year-chart-left.png" />
+                                <img src="/images/year-chart-left.png" alt=""/>
                                 <div className="yearboxfooter">
                                     <span></span> Physicians
                                     <span></span> My Schedules
@@ -87,7 +87,7 @@ const Admin = () => {
                         <div className="schedule-boxleft">
                                 <div className="yearbox">
                                     <h2>Yearly Schedules Insight</h2>
-                                    <span><a href="#" className="me-4 text-dark addphy" data-bs-toggle="modal" data-bs-target="#addphysicians"><i className="fa fa-plus"></i> <b className='d-none d-lg-inline'>Add Physicians</b></a>
+                                    <span><Link to="#" className="me-4 text-dark addphy" data-bs-toggle="modal" data-bs-target="#addphysicians"><i className="fa fa-plus"></i> <b className='d-none d-lg-inline'>Add Physicians</b></Link>
                                         
                                     </span>
 
@@ -95,7 +95,7 @@ const Admin = () => {
                                         <div className="modal-dialog">
                                             <div className="modal-content"> 
                                                     <div className="modal-body">
-                                                    <button type="button" class="btn-close loginmdl" data-bs-dismiss="modal"></button>
+                                                    <button type="button" className="btn-close loginmdl" data-bs-dismiss="modal"></button>
                                                         <div className='row'>
                                                          <div className='modalWrap'>
                                                             <div className='addmodalHeader'>
@@ -111,7 +111,7 @@ const Admin = () => {
                                                             </div>
 
                                                             <div className='addmodalhero'>
-                                                            <img src="/images/add-physician-hero.png" width={292} />
+                                                            <img src="/images/add-physician-hero.png" width={292} alt=""/>
                                                              <h3>Choose a Color</h3>
                                                              <p>
                                                                  Select a color to help you identify the physician throughout the app
@@ -121,10 +121,10 @@ const Admin = () => {
                                                             <div className='addmodalbdy'>
                                                                 <h4>Physician</h4>
                                                                 
-                                                                <div class="dr-name p-0 d-flex">
+                                                                <div className="dr-name p-0 d-flex">
                                                                 
                                                                 <div className='addnamephy'>                                                                
-                                                                <b><span class="dot-box2"></span> Dr. Sarah Jonas </b>
+                                                                <b><span className="dot-box2"></span> Dr. Sarah Jonas </b>
                                                                 <span>(Radiologist)</span>
                                                                 </div>
                                                                 </div>
@@ -133,35 +133,35 @@ const Admin = () => {
                                                                     <h4>Color</h4>
                                                                   <div className='selctClr'>
                                                                   <div>
-                            <input id="radio-1" class="radio-custom" name="radio-group" type="radio" />
-                            <label for="radio-1" class="radio-custom-label rc1"></label>
+                            <input id="radio-1" className="radio-custom" name="radio-group" type="radio" />
+                            <label for="radio-1" className="radio-custom-label rc1"></label>
                         </div>
                         <div>
-                            <input id="radio-2" class="radio-custom"name="radio-group" type="radio" />
-                            <label for="radio-2" class="radio-custom-label rc2"></label>
+                            <input id="radio-2" className="radio-custom"name="radio-group" type="radio" />
+                            <label for="radio-2" className="radio-custom-label rc2"></label>
                         </div>
                         <div>
-                            <input id="radio-3" class="radio-custom" name="radio-group" type="radio" />
-                            <label for="radio-3" class="radio-custom-label rc3"></label>
+                            <input id="radio-3" className="radio-custom" name="radio-group" type="radio" />
+                            <label for="radio-3" className="radio-custom-label rc3"></label>
                         </div>
 
                         <div>
-                            <input id="radio-4" class="radio-custom" name="radio-group" type="radio"  />
-                            <label for="radio-4" class="radio-custom-label rc4"></label>
+                            <input id="radio-4" className="radio-custom" name="radio-group" type="radio"  />
+                            <label for="radio-4" className="radio-custom-label rc4"></label>
                         </div>
                         <div>
-                            <input id="radio-5" class="radio-custom"name="radio-group" type="radio" checked />
-                            <label for="radio-5" class="radio-custom-label rc5"></label>
+                            <input id="radio-5" className="radio-custom"name="radio-group" type="radio" checked />
+                            <label for="radio-5" className="radio-custom-label rc5"></label>
                         </div>
                         <div>
-                            <input id="radio-6" class="radio-custom" name="radio-group" type="radio" />
-                            <label for="radio-6" class="radio-custom-label rc6"></label>
+                            <input id="radio-6" className="radio-custom" name="radio-group" type="radio" />
+                            <label for="radio-6" className="radio-custom-label rc6"></label>
                         </div>
                                                                     </div>
 
                                                                 </div>
                                                             </div>
-                                                           <div className='text-center'><input type='button' class='btn btn-primary' value='Confirm'></input></div> 
+                                                           <div className='text-center'><input type='button' className='btn btn-primary' value='Confirm'></input></div> 
                                                             </div>
 
                                                         </div>
@@ -180,7 +180,7 @@ const Admin = () => {
                                 <ul className="list-group addphylist">
                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                         <b><small className='dotdr violt'></small> Dr. Sarah Jonas <span className='drspec'>Radiologist</span></b>
-                                        <a href='#'><span className="badge"><i className="fa fa-pencil"></i></span></a>
+                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
                                             
                                     </li>
                                     <li className='list-group-item'>
@@ -191,7 +191,7 @@ const Admin = () => {
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                         <b><small className='dotdr orng'></small> Dr. Alvis Hay <span className='drspec'>Cardiologist</span></b>
-                                        <a href='#'><span class="badge"><i className="fa fa-pencil"></i></span></a>
+                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
                                     </li>
                                     <li className='list-group-item'>
                                             <div className='facilitybox'>
@@ -201,7 +201,7 @@ const Admin = () => {
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                         <b><small className='dotdr red'></small> Dr. Megan Stweard <span className='drspec'>Neuro Physician</span></b>
-                                        <a href='#'><span className="badge"><i className="fa fa-pencil"></i></span></a>
+                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
                                     </li>
                                     <li className='list-group-item'>
                                             <div className='facilitybox'>
@@ -211,7 +211,7 @@ const Admin = () => {
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                         <b><small className='dotdr orlight'></small> Dr. Amanda Jhon <span className='drspec'>Radiologist</span></b>
-                                        <a href='#'><span className="badge"><i className="fa fa-pencil"></i></span></a>
+                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
                                     </li>
                                     <li className='list-group-item'>
                                             <div className='facilitybox'>
@@ -221,7 +221,7 @@ const Admin = () => {
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                         <b><small className='dotdr green'></small> Dr. Jimin Park <span className='drspec'>Neuro Physician</span></b>
-                                        <a href='#'><span className="badge"><i className="fa fa-pencil"></i></span></a>
+                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
                                     </li>
                                     <li className='list-group-item'>
                                             <div className='facilitybox'>

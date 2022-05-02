@@ -1,5 +1,6 @@
 import React from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
+import { Link } from "react-router-dom";
 
 const Profile = () => {
     return (
@@ -22,7 +23,7 @@ const Profile = () => {
                           <h3>Racheal Adams</h3>
                           <p>Lorem ipsum dolor sit amet.</p>
                           <div className='profileboxfooter'>
-                            <a href='#'>Upload Picture</a>
+                            <Link to='#'>Upload Picture</Link>
                           </div>
                       </div>
                     </div>
@@ -34,21 +35,21 @@ const Profile = () => {
                         </div>
                         <div className='prorightform bdy'>
                         <form>
-                          <div class="row">
-                            <div class="col">
-                              <input type="text" class="form-control" placeholder="First Name*" name="name" />
+                          <div className="row">
+                            <div className="col">
+                              <input type="text" className="form-control" placeholder="First Name*" name="name" />
                               <small className='smalltext'>Please specify the first name</small>
                             </div>
-                            <div class="col">
-                              <input type="text" class="form-control" placeholder="Last Name*" name="last name" />
+                            <div className="col">
+                              <input type="text" className="form-control" placeholder="Last Name*" name="last name" />
                             </div>
                           </div>
-                          <div class="row mt-4">
-                            <div class="col">
-                              <input type="email" class="form-control" placeholder="Email*" name="email" />
+                          <div className="row mt-4">
+                            <div className="col">
+                              <input type="email" className="form-control" placeholder="Email*" name="email" />
                             </div>
-                            <div class="col">
-                              <input type="number" class="form-control" placeholder="Phone Number" name="phone number" />
+                            <div className="col">
+                              <input type="number" className="form-control" placeholder="Phone Number" name="phone number" />
                             </div>
                           </div>
                         </form>
@@ -66,21 +67,21 @@ const Profile = () => {
                         </div>
                         <div className='prorightform bdy'>
                         <form>
-                          <div class="row justify-content-center gap-4">
-                            <div class="col-6">
-                              <input type="password" class="form-control" placeholder="Current Password" name="" />
+                          <div className="row justify-content-center gap-4">
+                            <div className="col-6">
+                              <input type="password" className="form-control" placeholder="Current Password" name="" />
                              
                             </div>
-                            <div class="col-6">
-                              <input type="password" class="form-control" placeholder="New Password" name="" />
+                            <div className="col-6">
+                              <input type="password" className="form-control" placeholder="New Password" name="" />
                             </div>
                           
                          
-                            <div class="col-6">
-                              <input type="password" class="form-control" placeholder="Re-Type New" name="" />
+                            <div className="col-6">
+                              <input type="password" className="form-control" placeholder="Re-Type New" name="" />
                             </div>
-                            <div class="col-6">
-                              <a href='#' className='a-g-link'>Forgot Password?</a>
+                            <div className="col-6">
+                              <Link to='#' className='a-g-link'>Forgot Password?</Link>
                             </div>
                          </div>
                         </form>
