@@ -27,7 +27,7 @@ const Header = () => {
                                     </div>
                                 </li>
                                 <li className="nav-item d-flex">
-                                    <Link className="nav-link d-none d-lg-block pname" href="#">Racheal Adam</Link>
+                                    <a className="nav-link d-none d-lg-block pname" href="#">Racheal Adam</a>
                                     <span className="prfdv"><img src="\images\profilePic.png" width={'110'} alt='' /></span>
                                 </li>
                                 

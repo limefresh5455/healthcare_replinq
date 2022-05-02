@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
-import { Link } from "react-router-dom";
+
 
 const Physicians = () => {
   return (
@@ -21,19 +21,19 @@ const Physicians = () => {
           <div className='row justify-content-center mt-4'>
             <div className='col-md-8 text-center'>
               <form className=''>
-                <div className="row">
-                  <div className="col-4 col-md-5">
-                    <select className="form-select">
+                <div class="row">
+                  <div class="col-4 col-md-5">
+                    <select class="form-select">
                       <option>Select State</option>
                       <option>State 1</option>
                       <option>State 2</option>
                       <option>State 3</option>
                     </select>
                   </div>
-                  <div className="col-4 col-md-5">
-                    <input type="text" className="form-control" placeholder="Type Physician Name" name="" />
+                  <div class="col-4 col-md-5">
+                    <input type="text" class="form-control" placeholder="Type Physician Name" name="" />
                   </div>
-                  <div className="col-4 col-md-2">
+                  <div class="col-4 col-md-2">
                     <button className='btn btn-physearch'>Search</button>
                   </div>
                 </div>
@@ -46,18 +46,18 @@ const Physicians = () => {
 
                       <div className="dr-name phyname"><b>Dr. Sarah Jonas</b> <span className='d-block text-start'>Radiologist</span></div>
                       <div className="ms-auto">
-                        <Link to='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians">
+                        <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians">
                           <i className='fa fa-trash'></i> Remove
-                        </Link>
+                        </a>
                       </div>
                       <div className="modal smallsize" id="removephysicians">
                 <div className="modal-dialog">
                   
                   <div className="modal-content">
                     <div className="modal-body">
-                      <button type="button" className="btn-close loginmdl" data-bs-dismiss="modal"></button>
+                      <button type="button" class="btn-close loginmdl" data-bs-dismiss="modal"></button>
                       <div className='text-center'>
-                    <span className="warningIcon"><i className="fa fa-exclamation-triangle"></i></span>
+                    <span class="warningIcon"><i class="fa fa-exclamation-triangle"></i></span>
                   </div>
                       <div className='row text-center'>
                         
@@ -68,10 +68,10 @@ const Physicians = () => {
                       </div>
                       <div className=' row text-center'>
                         <div className=' col-md-6 text-center'>
-                          <input type='button' className='btn btn-primary w-100 removebtn' value='Cancel'></input>
+                          <input type='button' class='btn btn-primary w-100 removebtn' value='Cancel'></input>
                         </div>
                         <div className=' col-md-6 text-center'>
-                          <input type='button' className='btn btn-primary w-100' value='Confirm'></input>
+                          <input type='button' class='btn btn-primary w-100' value='Confirm'></input>
                         </div>
                       </div>
                     </div>
@@ -103,7 +103,7 @@ const Physicians = () => {
 
                       <div className="dr-name phyname"><b>Sarah Jonas</b> <span className='d-block align-left'>Cardiologist</span></div>
                       <div className="ms-auto">
-                        <Link to='#' className='a-g-link'><i className='fa fa-plus'></i> Add to Profile</Link>
+                        <a href='#' className='a-g-link'><i className='fa fa-plus'></i> Add to Profile</a>
                       </div>
                     </div>
 

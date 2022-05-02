@@ -5,11 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
 
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [company, setCompany] = useState("");
-  // const [intelli_badge_ID, setIntelli_badge_ID] = useState("");
-  // const [symplr_badge_ID, setSymplr_badge_ID] = useState("");
   const [not_a_subs_one, setNot_a_subs_one] = useState(false);
   const [not_a_subs_two, setNot_a_subs_two] = useState(false);
 
@@ -20,42 +15,6 @@ const Header = () => {
     handleSubmit: handleSubmit2,
   } = useForm();
 
-  // const submitForm = () => {
-  //   const newEntry = { email: email, password: password };
-  // }
-
-  // async function login() {
-  //   let item = { email, password }
-  //   console.warn(item);
-
-  //   let result = await fetch("http://127.0.0.1:8000/api/login", {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: JSON.stringify(item)
-  //   });
-  //   result = await result.json();
-  //   alert("login Successfully");
-  // }
-
-  // async function signUp() {
-  //   let item = { email, password, company, symplr_badge_ID, intelli_badge_ID, not_a_subs_one, not_a_subs_two }
-  //   console.warn(item);
-  //   let result = await fetch("http://127.0.0.1:8000/api/register", {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: JSON.stringify(item)
-  //   });
-  //   result = await result.json();
-  //   alert("Register Successfully");
-  //   console.warn("result", result)
-  // }
-
   const handleChange = () => {
     setNot_a_subs_one(!not_a_subs_one);
   }
@@ -63,7 +22,6 @@ const Header = () => {
   const handleChangesec = () => {
     setNot_a_subs_two(!not_a_subs_two);
   }
-
 
   async function onSignUp(data, e) {
     const body = {
@@ -85,15 +43,15 @@ const Header = () => {
       body: JSON.stringify(body)
     });
     result = await result.json();
-    if(result.success === true){
+    if (result.success === true) {
       e.target.reset();
       toast.success(result.message, {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
       });
-    }else if(result.success === false){
-      if(result.message.email){
+    } else if (result.success === false) {
+      if (result.message.email) {
         toast.error(result.message.email[0], {
           position: "top-right",
           autoClose: 3000,
@@ -103,7 +61,7 @@ const Header = () => {
     }
   }
 
-  async function onLogin(data, e){
+  async function onLogin(data, e) {
     let result = await fetch("http://127.0.0.1:8000/api/login", {
       method: 'POST',
       headers: {
@@ -113,7 +71,7 @@ const Header = () => {
       body: JSON.stringify(data)
     });
     result = await result.json();
-    if(result.success === true){
+    if (result.success === true) {
       window.location.href = "/calendar";
       toast.success(result.message, {
         position: "top-right",
@@ -121,8 +79,8 @@ const Header = () => {
         closeOnClick: true,
       });
       localStorage.setItem('access_token', result.access_token);
-    }else{
-      if(result.message.message){
+    } else {
+      if (result.message.message) {
         toast.error(result.message.message[0], {
           position: "top-right",
           autoClose: 3000,
@@ -136,15 +94,15 @@ const Header = () => {
 
     <>
       <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
       <ToastContainer />
       <nav className="navbar navbar-expand-sm">
@@ -166,9 +124,7 @@ const Header = () => {
               <li className="nav-item">
                 <a className="nav-link" href="#contactus">Contact Us</a>
               </li>
-
             </ul>
-
           </div>
           <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mylogin">
             Login
@@ -278,12 +234,12 @@ const Header = () => {
                         <div className='row'>
                           <div className='col-12 mb-4'>
                             <input type='text' className='form-control' id='email' {...register("email", {
-                                required: "Email is required",
-                                pattern: {
-                                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                  message: "Email is invalid"
-                                }
-                              })} placeholder='Email' name='email' />
+                              required: "Email is required",
+                              pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                message: "Email is invalid"
+                              }
+                            })} placeholder='Email' name='email' />
                             <span className="inpicrgt"><i className='fa fa-envelope'></i></span>
                             {errors.email ? (
                               <>
@@ -302,9 +258,9 @@ const Header = () => {
                           </div>
                           <div className='col-12 mb-4'>
                             <input type='password' className='form-control' {...register("password", {
-                                required: "Password is required",
-                                minLength: { value: 8, message: "At least 8 character" }
-                              })} placeholder='Password' name='password' />
+                              required: "Password is required",
+                              minLength: { value: 8, message: "At least 8 character" }
+                            })} placeholder='Password' name='password' />
                             <span className="inpicrgtpws"><i className='fa fa-lock'></i></span>
                             {errors.password ? (
                               <>
@@ -340,9 +296,9 @@ const Header = () => {
                           </div>
                           <div className='col-12 mb-4'>
                             <input type='text' className='form-control' placeholder='Company' {...register("company", {
-                                required: "Company is required",
-                                maxLength: { value: 100, message: "Max 100 character" }
-                              })} name='company' />
+                              required: "Company is required",
+                              maxLength: { value: 100, message: "Max 100 character" }
+                            })} name='company' />
                             <span className="inpicrgtcomp"><i className='fa fa-building'></i></span>
                             {errors.company ? (
                               <>
@@ -364,9 +320,9 @@ const Header = () => {
                           </div>
                           <div className='col-12 mb-4'>
                             <input type='text' className='form-control' placeholder='Intellicentric badge ID' {...register("intelli_badge_ID", {
-                                required: "Intellicentric badge ID is required",
-                                maxLength: { value: 100, message: "Max 100 character" }
-                              })} name='intelli_badge_ID' />
+                              required: "Intellicentric badge ID is required",
+                              maxLength: { value: 100, message: "Max 100 character" }
+                            })} name='intelli_badge_ID' />
                             {errors.intelli_badge_ID ? (
                               <>
                                 {errors.intelli_badge_ID.type === "required" && (
@@ -389,9 +345,9 @@ const Header = () => {
                           </div>
                           <div className='col-12 mb-4'>
                             <input type='text' className='form-control' placeholder='Symplr badge ID' {...register("symplr_badge_ID", {
-                                required: "Symplr badge ID is required",
-                                maxLength: { value: 100, message: "Max 100 character" }
-                              })} name='symplr_badge_ID' />
+                              required: "Symplr badge ID is required",
+                              maxLength: { value: 100, message: "Max 100 character" }
+                            })} name='symplr_badge_ID' />
                             {errors.symplr_badge_ID ? (
                               <>
                                 {errors.symplr_badge_ID.type === "required" && (
@@ -413,7 +369,7 @@ const Header = () => {
                             </label>
                           </div>
                           <div className='col-12'>
-                            <input type='submit' className='btn btn-primary' value='Sign Up'/>
+                            <input type='submit' className='btn btn-primary' value='Sign Up' />
                           </div>
                           <div className='col-12 mt-2 mb-2 text-center'>
                             Already have an account <a href='#' data-bs-toggle="modal" data-bs-target="#mylogin" className='text-underline'>Login</a>
