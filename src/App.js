@@ -11,13 +11,13 @@ import Physicians from "./components/Physicians";
 import NoPage from "./components/NoPage";
 import Calendar from "./components/Calendar";
 import Schedule from "./components/Schedule";
-import Datafetch from "./components/Datafetch"; 
+import Datafetch from "./components/Datafetch";
 
 
 export default function App() {
-  return (
-  
-    <BrowserRouter>
+
+   return (
+      <BrowserRouter>
       <Routes>
          
        <Route path="/Datafetch" element={<Backend />}>            
@@ -63,10 +63,8 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
 
       </Routes>
-    </BrowserRouter>
-
-
-  );
+    </BrowserRouter>       
+   );
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

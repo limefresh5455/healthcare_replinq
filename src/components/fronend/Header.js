@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//import { AuthContext } from "../Context";
 
 const Header = () => {
 
+  //const { signIn } = React.useContext(AuthContext);
   const [not_a_subs_one, setNot_a_subs_one] = useState(false);
   const [not_a_subs_two, setNot_a_subs_two] = useState(false);
 
@@ -72,13 +74,15 @@ const Header = () => {
     });
     result = await result.json();
     if (result.success === true) {
-      window.location.href = "/calendar";
+      
+       window.location.href = "/calendar";
       toast.success(result.message, {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
       });
       localStorage.setItem('access_token', result.access_token);
+     // signIn("hii", "2345");
     } else {
       if (result.message.message) {
         toast.error(result.message.message[0], {
@@ -89,6 +93,8 @@ const Header = () => {
       }
     }
   }
+
+
 
   return (
 
