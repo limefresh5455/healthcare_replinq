@@ -26,6 +26,7 @@ const AdminLeftMenu = () => {
             window.location.href = "/";
             localStorage.clear();
         } else {
+            window.location.href = "/";
             if (result.message.message) {
                 toast.error(result.message.message[0], {
                     position: "top-right",

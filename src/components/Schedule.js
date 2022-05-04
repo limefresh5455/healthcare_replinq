@@ -1,26 +1,14 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import { useLocation } from 'react-router-dom';
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-const Schedule =()=>{
-  //  const location = useLocation();  
-  // console.log(location);
-  
-  //  let arr=this.props.item
-  // const search = props.location.search;
-  // const params = new URLSearchParams(search); 
-  // const IdFromURL = params.get('info'); 
-
-  //  console.log(info.event.title)
-
+const Schedule = () => {
  
 
-  const {info} = useParams()
+  const { info } = useParams()
 
- 
 
-  
   return (
     <>
       <div className="offcanvas offcanvas-start" id="demo">
@@ -45,68 +33,68 @@ const Schedule =()=>{
               </div>
               {/* <h6 className='text-center'  for="disabledFieldsetCheck">Dr. Sarah Jonas</h6> */}
             </div>
-           
-            <div className="modal smallsize" id="removephysicians">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="btn-close loginmdl" data-bs-dismiss="modal"></button>
-                      <div className='row'>
-                        <div className='modalWrap'>
-                          <div className='removehdr'>
-                            <a href='#' className='active'>Color</a>
-                            <a href='#'>Notifications</a>
-                          </div>
-                          <div className='addmodalbdy'>
-                            <h4>Physician</h4>
-                            <div className="dr-name p-0 d-flex">
-                              <div className='addnamephy'>
-                                <b><span className="dot-box2"></span> Dr. Sarah Jonas </b>
-                                <span>(Radiologist)</span>
-                              </div>
-                            </div>
-                            <div className='colorbox'>
-                              <h4>Color</h4>
-                              <div className='selctClr'>
-                                <div>
-                                  <input id="radio-1" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-1" class="radio-custom-label rc1"></label>
-                                </div>
-                                <div>
-                                  <input id="radio-2" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-2" class="radio-custom-label rc2"></label>
-                                </div>
-                                <div>
-                                  <input id="radio-3" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-3" class="radio-custom-label rc3"></label>
-                                </div>
 
-                                <div>
-                                  <input id="radio-4" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-4" class="radio-custom-label rc4"></label>
-                                </div>
-                                <div>
-                                  <input id="radio-5" class="radio-custom" name="radio-group" type="radio" checked />
-                                  <label for="radio-5" class="radio-custom-label rc5"></label>
-                                </div>
-                                <div>
-                                  <input id="radio-6" class="radio-custom" name="radio-group" type="radio" />
-                                  <label for="radio-6" class="radio-custom-label rc6"></label>
-                                </div>
+            <div className="modal smallsize" id="removephysicians">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-body">
+                    <button type="button" className="btn-close loginmdl" data-bs-dismiss="modal"></button>
+                    <div className='row'>
+                      <div className='modalWrap'>
+                        <div className='removehdr'>
+                          <a href='#' className='active'>Color</a>
+                          <a href='#'>Notifications</a>
+                        </div>
+                        <div className='addmodalbdy'>
+                          <h4>Physician</h4>
+                          <div className="dr-name p-0 d-flex">
+                            <div className='addnamephy'>
+                              <b><span className="dot-box2"></span> Dr. Sarah Jonas </b>
+                              <span>(Radiologist)</span>
+                            </div>
+                          </div>
+                          <div className='colorbox'>
+                            <h4>Color</h4>
+                            <div className='selctClr'>
+                              <div>
+                                <input id="radio-1" class="radio-custom" name="radio-group" type="radio" />
+                                <label for="radio-1" class="radio-custom-label rc1"></label>
+                              </div>
+                              <div>
+                                <input id="radio-2" class="radio-custom" name="radio-group" type="radio" />
+                                <label for="radio-2" class="radio-custom-label rc2"></label>
+                              </div>
+                              <div>
+                                <input id="radio-3" class="radio-custom" name="radio-group" type="radio" />
+                                <label for="radio-3" class="radio-custom-label rc3"></label>
+                              </div>
+
+                              <div>
+                                <input id="radio-4" class="radio-custom" name="radio-group" type="radio" />
+                                <label for="radio-4" class="radio-custom-label rc4"></label>
+                              </div>
+                              <div>
+                                <input id="radio-5" class="radio-custom" name="radio-group" type="radio" checked />
+                                <label for="radio-5" class="radio-custom-label rc5"></label>
+                              </div>
+                              <div>
+                                <input id="radio-6" class="radio-custom" name="radio-group" type="radio" />
+                                <label for="radio-6" class="radio-custom-label rc6"></label>
                               </div>
                             </div>
                           </div>
-                          <div className='text-center'>
-                            <input type='button' class='btn btn-primary w-100' value='Update'></input>
-                            <span className='linebreak'>OR</span>
-                            <input type='button' class='btn btn-primary w-100 removebtn' value='Remove from Profile'></input>
-                          </div>
+                        </div>
+                        <div className='text-center'>
+                          <input type='button' class='btn btn-primary w-100' value='Update'></input>
+                          <span className='linebreak'>OR</span>
+                          <input type='button' class='btn btn-primary w-100 removebtn' value='Remove from Profile'></input>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
             <div className='col-md-12'>
               <div className="row align-items-center">
                 <div className="col-md-12">
@@ -137,7 +125,7 @@ const Schedule =()=>{
                     </div>
                     <div className="row align-items-center">
                       <div className="col-md-2"><p style={{ "margin-left": "20px" }}>9:00 AM</p></div>
-                       <div className="col-md-10">
+                      <div className="col-md-10">
                         <div className="upschedulebox bdrleft mb-4">
                           <div className="uphdr">
                           </div>
