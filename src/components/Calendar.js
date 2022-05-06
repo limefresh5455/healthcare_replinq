@@ -9,6 +9,7 @@ import Schedule from './Schedule';
 import { Link } from 'react-router-dom';
 
 let dts = [];
+let resObject = [];
 //let t = 0
 
 
@@ -42,20 +43,22 @@ export default class Calendar extends React.Component {
   componentDidMount() {
     // localStorage.setItem('Name', {});
     // 
-    http://127.0.0.1:8000/api/show
-    fetch("http://127.0.0.1:8000/api/doctor_details_mr/2", {
+    //http://127.0.0.1:8000/api/show
+    fetch("http://127.0.0.1:8000/api/doctor_details_mr/52", {
       method: "Get",
       headers: {
-
-
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1MTY1ODgzMCwiZXhwIjoxNjUxNjYyNDMwLCJuYmYiOjE2NTE2NTg4MzAsImp0aSI6IlNxTVNlMVE1WFI1d2Z2TXAiLCJzdWIiOjUyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.FdkTf9PiEnxtwp6oXzL3Pj9RJpFbdIpx0JutegHLqO0',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1MTc1NTkwMSwiZXhwIjoxNjUxNzU5NTAxLCJuYmYiOjE2NTE3NTU5MDEsImp0aSI6Imo4czNtNXRpTFVoWDUxbTAiLCJzdWIiOjUyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Z4pwNC2fXuDV9g8EdA655qInUIc3DsWbS79KE4zvXro',
         'Content-Type': ' application/json',
         'Accept': 'application/json+fhir',
       },
     }).then(response => response.json())
       .then(res => {
         console.log(res);
-        dts = [];
+        resObject = res;
+       // console.log(res.id);  
+       localStorage.setItem('alldata', JSON.stringify(res));
+      
+       dts = [];
         for (let i = 0; i < res.length; i++) {
           const obj = {
             id: res[i].id,
@@ -63,13 +66,15 @@ export default class Calendar extends React.Component {
             start: res[i].start_date
           }
           dts.push(obj);
-          this.setState({ calEvent: dts });
+          
         }
+       
+        this.setState({ calEvent: dts });
         let todayStr = new Date().toISOString().replace(/T.*$/, '')
         let k = 0
-
+          
       }).catch(err => console.log(err))
-
+       
   }
 
 
@@ -130,17 +135,20 @@ export default class Calendar extends React.Component {
   }
   handleEventClick = (info) => {
     // window.confirm(info).push({
-    //   pathname: "/schedule",
-    //   state: {
-    //     value: info
-    //   },
-    // });
-    // <Link to={{ pathname:'/schedule',
-    //    state: {
-    //      value: info
-    //    } }}>Move to next Page</Link>
+    console.log(info);
+    console.log(resObject);
     console.log(info.event.title);
-    localStorage.setItem('event', JSON.stringify(info.event));
+    for(let j=0 ; j< resObject.length; j++)
+    { 
+       if(info.event.start_date == resObject[j].start_date)
+       {
+        console.log("id kkk" +resObject[j].id);  
+        localStorage.setItem('event', JSON.stringify(resObject[j])); 
+        break;      
+       }
+          
+    }
+    
     window.location.href = "/schedule/";
 
     // this.setState({ event: info })
