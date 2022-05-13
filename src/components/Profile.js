@@ -11,6 +11,7 @@ const Profile = () => {
     register: register2,
     formState: { errors: errors2 },
     handleSubmit: handleSubmit2,
+    getValues: getValues2
   } = useForm();
 
   const [email, setEmail] = useState("");
@@ -23,50 +24,35 @@ const Profile = () => {
   const [old_password, setOldPassword] = useState("");
   const [new_password, setNewPassword] = useState("");
   const [cnfirm_psd, setCnPassword] = useState("");
-  
-
-  const onSubmits = (event) => {
-    event.preventDefault();
-    alert("Form Submitted");
-  };
   const current_token = localStorage.getItem('access_token');
-  
   let eventObject;
 
   const callAPI = () => {
-
-    let result = fetch("http://127.0.0.1:8000/api/getDataa", {
+    let result = fetch("http://127.0.0.1:8000/api/getData", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Contect-Type': 'application/json',
         'Authorization': 'Bearer '+ current_token,
       },
-      
     }).then((result) => {
       result.json().then((res) => {
-        console.log(res);
+        setName(res.data.name);
         setEmail(res.data.email);
         setFirstname(res.data.first_name);
         setLastName(res.data.last_name);
         setPhoneNumber(res.data.phone_no);
         setImages(res.data.images);
         setId(res.data.id);
-    
       })
     })
-
   }
 
   useEffect(() => {
-    const url = "http://127.0.0.1:8000/api/getDataa";
-
     callAPI()
   }, []);
 
   async function updateProfile(data, e) {
-    console.log(data);
-
     let result = await fetch("http://127.0.0.1:8000/api/updateData/" + id, {
       method: 'POST',
       headers: {
@@ -77,10 +63,7 @@ const Profile = () => {
       body: JSON.stringify(data)
     });
     result = await result.json();
-    console.log(result);
     if (result.success === true) {
-     // alert('update');
-     // e.target.reset();
       toast.success(result.message, {
         position: "top-right",
         autoClose: 3000,
@@ -95,12 +78,9 @@ const Profile = () => {
         });
       }
     }
-
   };
  
   async function changepassword(data, e) {
-    alert('password');
-    console.log(data);
     let result = await fetch("http://127.0.0.1:8000/api/changepassword", {
       method: 'POST',
       headers: {
@@ -111,19 +91,15 @@ const Profile = () => {
       body: JSON.stringify(data)
     });
     result = await result.json();
-    console.log(result.message);
     if (result.success === true) {
-      // e.target.reset();
-      alert('change');
+      e.target.reset();
       toast.success(result.message, {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
       });
     } else if (result.success === false) {
-      alert('change if else');
       if (result.message) {
-        alert('change false');
         toast.error(result.message, {
           position: "top-right",
           autoClose: 3000,
@@ -135,7 +111,6 @@ const Profile = () => {
   };
 
   return (
-
     <>
      <ToastContainer
         position="top-right"
@@ -162,7 +137,7 @@ const Profile = () => {
                   {/* <img src="\images\profilePic.png" width={'135'} alt='' /> */}
                   <img src={images} width={'135'} height={45} alt='' />
                 </div>
-                <h3>Racheal Adams</h3>
+                <h3>{(name) ? name : ''}</h3>
                 <p>Lorem ipsum dolor sit amet.</p>
                 <div className='profileboxfooter'>
                   <a href='#'>Upload Picture</a>
@@ -179,7 +154,6 @@ const Profile = () => {
                   <form  onSubmit={handleSubmit(updateProfile)}>
                     <div class="row">
                       <div class="col">
-                             
                         <input type="text" class="form-control" 
                           {...register("first_name", {
                             required: "First Name is required"
@@ -205,7 +179,6 @@ const Profile = () => {
                           {...register("last_name", {
                             required: "Last Name is required"
                           })}
-                          
                           placeholder="Last Name*"
                           name="last_name" 
                           id="last_name" 
@@ -231,8 +204,7 @@ const Profile = () => {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                               message: "Email is invalid"
                             }
-                          })}  
-                          
+                          })}
                           placeholder="Email*"
                           name="email"
                           defaultValue={email}
@@ -272,7 +244,6 @@ const Profile = () => {
                     </div> 
                   </form>
                 </div>
-             
               </div>
               <div className="schedule-boxleft prorightform mt-5">
                 <div className='prorightform hdr'>
@@ -283,45 +254,41 @@ const Profile = () => {
                   <form onSubmit={handleSubmit2(changepassword)} >
                     <div class="row justify-content-center gap-4">
                       <div class="col-6">
-                        <input type="password"
+                           <div class="position-relative">
+                              <input type="password"
                           class="form-control"
                            {...register2("old_password", {
-                            required: "old_password is required",
-                            minLength: { value: 8, message: "At least 8 character" }
+                            required: "old_password is required"
                           })} 
                           placeholder="Current Password" name='old_password'
                           />
-                          <span className="inpicrgtpws"><i className='fa fa-lock'></i></span>
-                            {errors.old_password ? (
-                              <>
-                                {errors.old_password.type === "required" && (
-                                  <p className="errorMessage">
-                                    {errors.old_password.message}
-                                  </p>
-                                )}
-                                {errors.old_password.type === "minLength" && (
-                                  <p className="errorMessage">
-                                    {errors.password.message}
-                                  </p>
-                                )}
-                              </>
-                            ) : null}
+                          <span className="inpicrgtpws old-pass"><i className='fa fa-lock'></i></span>
+                           </div>
+                          {errors2.old_password ? (
+                            <>
+                              {errors2.old_password.type === "required" && (
+                                <p className="errorMessage">
+                                  {errors2.old_password.message}
+                                </p>
+                              )}
+                            </>
+                          ) : null}
                       </div>
                       <div class="col-6">
                         <input type="password"
                           class="form-control"
                           placeholder="New Password"
-                          name="new_password"
-                          {...register2("new_password", {
+                          name="password"
+                          {...register2("password", {
                             required: "New password is required"
                           })}
                           autocomplete="off"
                            />
-                          {errors.new_password ? (
+                          {errors2.password ? (
                             <>
-                              {errors.new_password.type === "required" && (
+                              {errors2.password.type === "required" && (
                                 <p className="errorMessage">
-                                  {errors.new_password.message}
+                                  {errors2.password.message}
                                 </p>
                               )}
                             </>
@@ -331,32 +298,30 @@ const Profile = () => {
                         <input type="password"
                          class="form-control"
                          placeholder="Re-Type New"
-                         name="cnfirm_psd" 
-                         {...register2("cnfirm_psd", {
-                          required: "Confirm password is required"
-                        })}
+                         name="confirm_password" 
+                          {...register2("confirm_password", {
+                            required: "Please confirm password!",
+                            validate: {
+                              matchesPreviousPassword: (value) => {
+                                const { password } = getValues2();
+                                return password === value || "Passwords should match!";
+                              }
+                            }
+                          })}
                          autocomplete="off"
                          />
-                         {errors.cnfirm_psd ? (
-                            <>
-                              {errors.cnfirm_psd.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors.cnfirm_psd.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null}
-                      </div>
-                      <div class="col-6">
-                        <a href='#' className='a-g-link'>Forgot Password?</a>
+                         {errors2.confirm_password && (
+                          <p className="errorMessage">
+                            {errors2.confirm_password.message}
+                          </p>
+                         )}
                       </div>
                       <div className='prorightform ftr'>
-                        <button className='btn btn-primary'  type="submit">Update Password</button>
-                     </div>
+                        <button className='btn btn-primary' type="submit">Update Password</button>
+                      </div>
                     </div>
                   </form>
                 </div>
-                
               </div>
             </div>
           </div>

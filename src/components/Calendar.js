@@ -41,23 +41,18 @@ export default class Calendar extends React.Component {
     }));
   }
   componentDidMount() {
-    // localStorage.setItem('Name', {});
-    // 
-    //http://127.0.0.1:8000/api/show
-    fetch("http://127.0.0.1:8000/api/doctor_details_mr/52", {
-      method: "Get",
+    const current_token = localStorage.getItem('access_token');
+    fetch("http://127.0.0.1:8000/api/doctor_details_mr/1", {
+      method: "GET",
       headers: {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1MTc1NTkwMSwiZXhwIjoxNjUxNzU5NTAxLCJuYmYiOjE2NTE3NTU5MDEsImp0aSI6Imo4czNtNXRpTFVoWDUxbTAiLCJzdWIiOjUyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Z4pwNC2fXuDV9g8EdA655qInUIc3DsWbS79KE4zvXro',
+        'Authorization': 'Bearer '+ current_token,
         'Content-Type': ' application/json',
         'Accept': 'application/json+fhir',
       },
     }).then(response => response.json())
       .then(res => {
-        console.log(res);
         resObject = res;
-       // console.log(res.id);  
        localStorage.setItem('alldata', JSON.stringify(res));
-      
        dts = [];
         for (let i = 0; i < res.length; i++) {
           const obj = {

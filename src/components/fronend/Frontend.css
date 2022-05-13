@@ -471,3 +471,10 @@
   color: red;
   font-size: 14px;
 }
+
+span.old-pass{
+  position: absolute;
+  right: 7px;
+  top: 18px;
+  color: #707070;
+}

@@ -73,17 +73,14 @@ const Header = () => {
       body: JSON.stringify(data)
     });
     result = await result.json();
-    console.log(result.access_token);
     if (result.success === true) {
-      
-       window.location.href = "/calendar";
+      window.location.href = "/calendar";
       toast.success(result.message, {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
       });
       localStorage.setItem('access_token', result.access_token);
-     // signIn("hii", "2345");
     } else {
       if (result.message.message) {
         toast.error(result.message.message[0], {
