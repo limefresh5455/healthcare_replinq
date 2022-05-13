@@ -73,6 +73,7 @@ const Header = () => {
       body: JSON.stringify(data)
     });
     result = await result.json();
+    console.log(result.access_token);
     if (result.success === true) {
       
        window.location.href = "/calendar";

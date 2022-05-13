@@ -658,3 +658,7 @@
       top: 12px;
       z-index: 1;
 }
+
+.errorMessage{
+  color: red !important;
+}

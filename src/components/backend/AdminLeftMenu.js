@@ -17,6 +17,7 @@ const AdminLeftMenu = () => {
             },
         });
         result = await result.json();
+        console.log(result);
         if (result.success === true) {
             toast.success(result.success, {
                 position: "top-right",
