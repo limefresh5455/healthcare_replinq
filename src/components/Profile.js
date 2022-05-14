@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AdminLeftMenu from './backend/AdminLeftMenu';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import profileService from '../services/profileService';
+import toaster from '../helpers/toaster';
+import Configuration from '../config/config';
 
 const Profile = () => {
-
+  const config = new Configuration();
   const { register, handleSubmit, getValues, formState: { errors } } = useForm();
   const {
     register: register2,
@@ -13,7 +15,7 @@ const Profile = () => {
     handleSubmit: handleSubmit2,
     getValues: getValues2
   } = useForm();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -24,19 +26,10 @@ const Profile = () => {
   const [old_password, setOldPassword] = useState("");
   const [new_password, setNewPassword] = useState("");
   const [cnfirm_psd, setCnPassword] = useState("");
-  const current_token = localStorage.getItem('access_token');
-  let eventObject;
-
-  const callAPI = () => {
-    let result = fetch("http://127.0.0.1:8000/api/getData", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Contect-Type': 'application/json',
-        'Authorization': 'Bearer '+ current_token,
-      },
-    }).then((result) => {
-      result.json().then((res) => {
+  const [sendImage, setSendImage] = useState("");
+  const hiddenFileInput = React.useRef();
+  const getProfileData = () => {
+    new profileService().getProfileData().then(res => {
         setName(res.data.name);
         setEmail(res.data.email);
         setFirstname(res.data.first_name);
@@ -44,70 +37,65 @@ const Profile = () => {
         setPhoneNumber(res.data.phone_no);
         setImages(res.data.images);
         setId(res.data.id);
-      })
-    })
+        localStorage.setItem('user_name', res.data.name);
+      }
+    );
   }
 
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+
+  const handleChange = event => {
+    const bodyFormData = new FormData();
+    bodyFormData.append('images', hiddenFileInput.current.files[0]);
+    new profileService().updateImage(bodyFormData, id).then(data => {
+        if (data.success === true) {
+          setImages(data.image);
+          localStorage.setItem('user_image', data.image);
+          new toaster().successMessage(data.message);
+        } else if (data.success === false) {
+          if (data.message.message) {
+            new toaster().errorMessage(data.message.message);
+          }
+        }
+      }
+    );
+  };
+
   useEffect(() => {
-    callAPI()
-  }, []);
+    getProfileData()
+  }, [id]);
 
   async function updateProfile(data, e) {
-    let result = await fetch("http://127.0.0.1:8000/api/updateData/" + id, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': 'Bearer '+ current_token,
-      },
-      body: JSON.stringify(data)
-    });
-    result = await result.json();
-    if (result.success === true) {
-      toast.success(result.message, {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-      });
-    } else if (result.success === false) {
-      if (result.message.email) {
-        toast.error(result.message.email[0], {
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-        });
+    setIsLoading(!isLoading);
+    new profileService().updateProfile(data, id).then(data => {
+        if (data.success === true) {
+          setIsLoading(isLoading);
+          new toaster().successMessage(data.message);
+          e.target.reset();
+        } else if (data.success === false) {
+          setIsLoading(false);
+          if (data.message.email) {
+            new toaster().errorMessage(data.message.email[0]);
+          }
+        }
       }
-    }
+    );
   };
  
   async function changepassword(data, e) {
-    let result = await fetch("http://127.0.0.1:8000/api/changepassword", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': 'Bearer '+ current_token,
-      },
-      body: JSON.stringify(data)
-    });
-    result = await result.json();
-    if (result.success === true) {
-      e.target.reset();
-      toast.success(result.message, {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-      });
-    } else if (result.success === false) {
-      if (result.message) {
-        toast.error(result.message, {
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-        });
+    new profileService().changePassword(data).then(data => {
+        if (data.success === true) {
+          e.target.reset();
+          new toaster().successMessage(data.message);
+        } else if (data.success === false) {
+          if (data.message) {
+            new toaster().errorMessage(data.message);
+          }
+        }
       }
-    }
-   
+    );   
   };
 
   return (
@@ -135,12 +123,18 @@ const Profile = () => {
                 <div className='propicbox'>
                   {/* <p>{images}</p> */}
                   {/* <img src="\images\profilePic.png" width={'135'} alt='' /> */}
-                  <img src={images} width={'135'} height={45} alt='' />
+                  <img src={config.IMG_URL + '' + images} width={'135'} alt='' />
                 </div>
                 <h3>{(name) ? name : ''}</h3>
                 <p>Lorem ipsum dolor sit amet.</p>
                 <div className='profileboxfooter'>
-                  <a href='#'>Upload Picture</a>
+                  <a href='#' onClick={handleClick}>Upload Picture</a>
+                  <input
+                    type="file"
+                    ref={hiddenFileInput}
+                    onChange={handleChange}
+                    style={{display: 'none'}}
+                  />
                 </div>
               </div>
             </div>
@@ -240,7 +234,7 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className='prorightform ftr  mt-4'>
-                      <input type='submit' className='btn btn-primary' value='Save Changes'></input>
+                      <input type='submit' disabled={isLoading} className='btn btn-primary' value='Save Changes'></input>
                     </div> 
                   </form>
                 </div>

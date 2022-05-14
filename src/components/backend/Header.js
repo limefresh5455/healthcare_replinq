@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import profileService from '../../services/profileService';
+import Configuration from '../../config/config';
 
 const Header = () => {
-  const [name, setName] = useState("");
-  const current_token = localStorage.getItem('access_token');
-  const callAPI = () => {
-    let result = fetch("http://127.0.0.1:8000/api/getData", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Contect-Type': 'application/json',
-        'Authorization': 'Bearer '+ current_token,
-      },
-    }).then((result) => {
-      result.json().then((res) => {
-        setName(res.data.name);
-      })
-    })
-  }
-
-  useEffect(() => {
-    callAPI()
-  }, []);
+  const config = new Configuration();
+  const name = localStorage.getItem('user_name');
+  const image = localStorage.getItem('user_image');
 
   return (
     <>
@@ -47,7 +32,7 @@ const Header = () => {
                   </li>
                   <li className="nav-item d-flex">
                     <a className="nav-link d-none d-lg-block pname" href="#">{(name) ? name : ''}</a>
-                    <span className="prfdv"><img src="\images\profilePic.png" width={'110'} alt='' /></span>
+                    <span className="prfdv"><img src={config.IMG_URL + '' + image} width={'110'} alt='' /></span>
                   </li>
                 </ul>
               </div>

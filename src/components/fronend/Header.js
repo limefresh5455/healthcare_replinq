@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-//import { AuthContext } from "../Context";
+import { ToastContainer } from 'react-toastify';
+import authService from '../../services/authService';
+import toaster from '../../helpers/toaster';
 
 const Header = () => {
-
-  //const { signIn } = React.useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [not_a_subs_one, setNot_a_subs_one] = useState(false);
   const [not_a_subs_two, setNot_a_subs_two] = useState(false);
-
   const { register, handleSubmit, getValues, formState: { errors } } = useForm();
   const {
     register: register2,
@@ -26,6 +24,7 @@ const Header = () => {
   }
 
   async function onSignUp(data, e) {
+    setIsLoading(!isLoading);
     const body = {
       "email": data.email,
       "password": data.password,
@@ -35,61 +34,38 @@ const Header = () => {
       "not_a_subs_one": not_a_subs_one,
       "not_a_subs_two": not_a_subs_two,
     }
-    let result = await fetch("http://127.0.0.1:8000/api/register", {
-      method: 'POST',
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(body)
-    });
-    result = await result.json();
-    if (result.success === true) {
-      e.target.reset();
-      toast.success(result.message, {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-      });
-    } else if (result.success === false) {
-      if (result.message.email) {
-        toast.error(result.message.email[0], {
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-        });
+    new authService().register(body).then(data => {
+        if (data.success === true) {
+          setIsLoading(isLoading);
+          new toaster().successMessage(data.message);
+          e.target.reset();
+        } else if (data.success === false) {
+          setIsLoading(false);
+          if (data.message.email) {
+            new toaster().errorMessage(data.message.email[0]);
+          }
+        }
       }
-    }
+    );
   }
 
   async function onLogin(data, e) {
-    let result = await fetch("http://127.0.0.1:8000/api/login", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-    result = await result.json();
-    if (result.success === true) {
-      window.location.href = "/calendar";
-      toast.success(result.message, {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-      });
-      localStorage.setItem('access_token', result.access_token);
-    } else {
-      if (result.message.message) {
-        toast.error(result.message.message[0], {
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-        });
+    setIsLoading(!isLoading);
+    new authService().login(data).then(data => {
+        if (data.success === true) {
+          setIsLoading(isLoading);
+          window.location.href = "/calendar";
+          new toaster().successMessage(data.message);
+          localStorage.setItem('access_token', data.access_token);
+          e.target.reset();
+        } else {
+          setIsLoading(false);
+          if (data.message.message) {
+            new toaster().errorMessage(data.message.message[0]);
+          }
+        }
       }
-    }
+    );
   }
 
 
@@ -98,17 +74,16 @@ const Header = () => {
 
     <>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
       />
-      <ToastContainer />
       <nav className="navbar navbar-expand-sm">
         <div className="container">
           <a className="navbar-brand" href="javascript:void(0)"> <img src="\images\logo.jpg" width={'100'} alt="" /></a>
@@ -188,7 +163,7 @@ const Header = () => {
                               <a href='#' className='float-right'>Forget Password</a>
                             </div>
                             <div className='col-12'>
-                              <input type='submit' className='btn btn-primary' value='Login'></input>
+                              <input type='submit' disabled={isLoading} className='btn btn-primary' value='Login'></input>
                             </div>
                             <div className='col-12 mt-4 mb-4 text-center'>
                               Don't have an account <a data-bs-toggle="modal" data-bs-target="#ModalRegistration" href='#' className='text-underline'>Sign Up</a>
@@ -373,7 +348,7 @@ const Header = () => {
                             </label>
                           </div>
                           <div className='col-12'>
-                            <input type='submit' className='btn btn-primary' value='Sign Up' />
+                            <input type='submit' disabled={isLoading} className='btn btn-primary' value='Sign Up' />
                           </div>
                           <div className='col-12 mt-2 mb-2 text-center'>
                             Already have an account <a href='#' data-bs-toggle="modal" data-bs-target="#mylogin" className='text-underline'>Login</a>
