@@ -15,7 +15,7 @@ import Datafetch from "./components/Datafetch";
 
 
 export default function App() {
-  const isLoggedIn = localStorage.getItem('access_token');
+  const isLoggedIn =  localStorage.getItem('access_token') != null;
   return (
     <BrowserRouter>
       <Routes>
