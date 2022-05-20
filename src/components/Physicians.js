@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import Configuration from '../config/config';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-
+import { ToastContainer } from 'react-toastify';
 const Physicians = () => {
 
 
@@ -87,6 +87,28 @@ const Physicians = () => {
       </>
     )
   }
+  function deleteUser(doctor_id)
+  {  
+    fetch('http://127.0.0.1:8000/api/delete/' + doctor_id, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json+fhir",
+        'Authorization': 'Bearer ' + current_token,
+      },
+    })
+      .then((response) => {
+        response.json().then((data) => {
+          console.log(data)
+        })
+      })
+  }
+
+  function AddUser(user)
+  {
+    alert(user.reference_id +"");
+  }
+
   return (
 
     <>
@@ -147,13 +169,20 @@ const Physicians = () => {
                         <div className="dr-name phyname"><b>Dr.{user.full_name}</b> <span className='d-block text-start'>Radiologist</span></div>
                         {user.reference_id == user.doctor_id ?
                           <div className="ms-auto">
-                            <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians">
+                            {console.log(user)}
+                            <a href='#' className='a-g-link' 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#removephysicians"
+                             onClick={()=>deleteUser(user.doctor_id)}
+                            >
                               <i className='fa fa-trash'></i> Remove
                             </a>
                           </div>
                           :
                           <div className="ms-auto">
-                            <a href='#' className='a-g-link'><i className='fa fa-plus'></i> Add to Profile</a>
+                            <a href='#' className='a-g-link'  onClick={()=>AddUser(user)}>
+                              <i className='fa fa-plus'></i> Add to Profile
+                            </a>
                           </div>
                         }
 
