@@ -7,10 +7,10 @@ import { INITIAL_EVENTS, createEventId } from '../events'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import Schedule from './Schedule';
 import { Link } from 'react-router-dom';
+import physicianService from '../services/physicianService';
 
 let dts = [];
 let resObject = [];
-//let t = 0
 
 export default class Calendar extends React.Component {
 
@@ -28,9 +28,9 @@ export default class Calendar extends React.Component {
         title: "",
         start: "",
         start_date: ""
-      }
+      },
+      physicianService: new physicianService()
     })
-
   }
 
   toggle() {
@@ -38,18 +38,11 @@ export default class Calendar extends React.Component {
       modal: !prevState.modal
     }));
   }
+
   componentDidMount() {
-    const current_token = localStorage.getItem('access_token');
-    fetch("http://127.0.0.1:8000/api/doctor_details_mr/1", {
-      method: "GET",
-      headers: {
-        'Authorization': 'Bearer '+ current_token,
-        'Content-Type': ' application/json',
-        'Accept': 'application/json+fhir',
-      },
-    }).then(response => response.json())
-      .then(res => {
-        resObject = res;
+    const user_id = localStorage.getItem('user_id');
+    this.state.physicianService.getPhysicianByMr(user_id).then(res => {
+       resObject = res;
        localStorage.setItem('alldata', JSON.stringify(res));
        dts = [];
         for (let i = 0; i < res.length; i++) {
@@ -59,17 +52,13 @@ export default class Calendar extends React.Component {
             start: res[i].start_date
           }
           dts.push(obj);
-          
         }
-       
         this.setState({ calEvent: dts });
         let todayStr = new Date().toISOString().replace(/T.*$/, '')
         let k = 0
-          
-      }).catch(err => console.log(err))
-       
+      }
+    );
   }
-
 
   render() {
     return (
@@ -104,8 +93,6 @@ export default class Calendar extends React.Component {
     )
   }
 
-
-
   renderSidebar() {
     return (
       <>
@@ -116,38 +103,25 @@ export default class Calendar extends React.Component {
     )
   }
 
-
-
   handleDateSelect = (selectInfo) => {
     let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
-
     calendarApi.unselect() // clear date selection
-
-
   }
+
   handleEventClick = (info) => {
     // window.confirm(info).push({
-    console.log(info);
-    console.log(resObject);
-    console.log(info.event.title);
     for(let j=0 ; j< resObject.length; j++)
     { 
        if(info.event.start_date == resObject[j].start_date)
-       {
-        console.log("id kkk" +resObject[j].id);  
+       { 
         localStorage.setItem('event', JSON.stringify(resObject[j])); 
         break;      
        }
-          
     }
-    
     window.location.href = "/schedule/";
-
     // this.setState({ event: info })
-
   }
-
 }
 function renderEventContent(eventInfo) {
   return (

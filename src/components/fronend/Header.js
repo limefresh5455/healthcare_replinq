@@ -54,9 +54,10 @@ const Header = () => {
     new authService().login(data).then(data => {
         if (data.success === true) {
           setIsLoading(isLoading);
-          window.location.href = "/calendar";
+          window.location.href = "/admin";
           new toaster().successMessage(data.message);
           localStorage.setItem('access_token', data.access_token);
+          localStorage.setItem('user_id', data.user_id);
           e.target.reset();
         } else {
           setIsLoading(false);

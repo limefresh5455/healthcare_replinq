@@ -1,41 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import authService from '../../services/authService';
 
 const AdminLeftMenu = () => {
-    let token = localStorage.getItem('access_token')
-   // console.log(token)
-    async function Logout(data) {
-        let result = await fetch("http://127.0.0.1:8000/api/logout", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "authorization": "Bearer " + token
-            },
-        });
-        result = await result.json();
-        console.log(result);
-        if (result.success === true) {
-            toast.success(result.success, {
-                position: "top-right",
-                autoClose: 3000,
-                closeOnClick: true,
-            });
-            window.location.href = "/";
-            localStorage.clear();
-        } else {
-            window.location.href = "/";
-            if (result.message.message) {
-                toast.error(result.message.message[0], {
-                    position: "top-right",
-                    autoClose: 3000,
-                    closeOnClick: true,
-                });
+    async function Logout() {
+        new authService().logout().then(data => {
+            if (data.success === true) {
+                window.location.href = "/";
+                localStorage.clear();
             }
-        }
+          }
+        );
     }
     return (
 
