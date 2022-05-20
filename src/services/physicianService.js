@@ -50,5 +50,20 @@ class physicianService {
     });
   }
 
+  async deletePhysicianByMr(r_id) {
+    return fetch(this.config.BASE_URL+'/delete/'+r_id,{
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Contect-Type': 'application/json',
+        'Authorization': 'Bearer '+ this.config.access_token,
+      },
+    }).then(response => {
+      return response.json();
+    }).catch(error => {
+      new errors().handleError(error);
+    });
+  }
+
 }
 export default physicianService;

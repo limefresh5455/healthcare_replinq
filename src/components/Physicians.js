@@ -45,19 +45,11 @@ const Physicians = () => {
   }
   function deleteUser(doctor_id)
   {  
-    fetch('http://127.0.0.1:8000/api/delete/' + doctor_id, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json+fhir",
-        'Authorization': 'Bearer ' + current_token,
-      },
-    })
-      .then((response) => {
-        response.json().then((data) => {
-          console.log(data)
-        })
-      })
+   
+    new physicianService().deletePhysicianByMr(doctor_id).then(data => {
+      console.log(data)
+    }
+  );
   }
 
   function AddUser(user)
