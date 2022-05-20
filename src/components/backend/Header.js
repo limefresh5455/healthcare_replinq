@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import profileService from '../../services/profileService';
 import Configuration from '../../config/config';
 
-const Header = () => {
+const Header = (props) => {
   const config = new Configuration();
-  const name = localStorage.getItem('user_name');
-  const image = localStorage.getItem('user_image');
-
   return (
     <>
       <div className="topHd">
@@ -31,8 +27,10 @@ const Header = () => {
                     </div>
                   </li>
                   <li className="nav-item d-flex">
-                    <a className="nav-link d-none d-lg-block pname" href="#">{(name) ? name : ''}</a>
-                    <span className="prfdv"><img src={config.IMG_URL + '' + image} width={'110'} alt='' /></span>
+                    <Link to="#" className="nav-link d-none d-lg-block pname">{(props.userData) ? props.userData.name : ''}</Link>
+                    <span className="prfdv">
+                      <img src={(props.userData.images) ? config.IMG_URL + '' + props.userData.images : "/images/profile.png"} width={'110'} alt='' />
+                    </span>
                   </li>
                 </ul>
               </div>

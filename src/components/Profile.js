@@ -123,7 +123,7 @@ const Profile = () => {
                 <div className='propicbox'>
                   {/* <p>{images}</p> */}
                   {/* <img src="\images\profilePic.png" width={'135'} alt='' /> */}
-                  <img src={config.IMG_URL + '' + images} width={'135'} alt='' />
+                  <img src={(images) ? config.IMG_URL + '' + images : "/images/profile.png"} width={'135'} alt='' />
                 </div>
                 <h3>{(name) ? name : ''}</h3>
                 <p>Lorem ipsum dolor sit amet.</p>

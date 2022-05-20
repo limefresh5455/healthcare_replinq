@@ -1,21 +1,20 @@
 import React from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
+import { useOutletContext } from "react-router-dom";
 
-
-const Admin = () => {
+const Admin = (props) => {
+    const [userData] = useOutletContext();
     return (
-    
     <>
     <div className="offcanvas offcanvas-start" id="demo">
        <AdminLeftMenu />
       </div>
-      
       <div className="rightpane">
                 <div className="container">
                     <div className="welcombox">
                         <div className="row align-items-center">
                             <div className="col-md-6">
-                                <h1 className="mt-4">Hey Racheal, Good Morning <img src="/images/sunimg.png"/></h1>
+                                <h1 className="mt-4">Hey {(userData) ? userData.name : ''}, Good Morning <img src="/images/sunimg.png"/></h1>
                                 <h2>Welcome to your Replinq dashboard. View case insights below, edit your physicians and preview your next upcoming case.
                                 </h2>
                                 <h3>
@@ -28,11 +27,9 @@ const Admin = () => {
                         </div>
                     </div>
                 </div>
-
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-md-7'>
-                                          
+                        <div className='col-md-7'>         
                     <div className="row align-items-center">
                         <div className="col-md-12">
                             <div className="schedule-boxleft">
@@ -48,49 +45,38 @@ const Admin = () => {
                                 </div>
                             </div>
                         </div>
-                        
-                    </div> 
-                    
+                    </div>
                     <div className="row align-items-center">
                         <div className="col-md-12">
                             <div className="schedule-boxleft">
                                 <div className="yearbox">
                                     <h2>Upcoming Schedules (1)</h2>                                   
                                 </div>
-                                
                                 <div className="upschedulebox bdrleft">
                                     <div className="uphdr">
                                         <div className="dot-box"></div>
                                         <div className="dr-name p-0"><b>Dr. Sarah Jonas </b><span>(Radiologist)</span></div>
                                         <div className="upcom-time ms-auto">8 - 10:30am</div>
                                     </div>
-
                                      <div className="myphy-boxleft">
                                         <div className='row'>
                                             <div className='col-1 text-center mb-3'><i className="fa fa-building"></i></div>
                                             <div className='col-11 mb-3 ps-0'>Saint Francis Hospital</div>
-
                                             <div className='col-1 text-center'><i className="fa fa-medkit"></i></div>
                                             <div className='col-11 ps-0'>Right shoulder arthroscopy w/ subacromial decompression, rotator cuff repair</div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                
-              
                         </div>
                         <div className='col-md-5'>
                         <div className="schedule-boxleft">
                                 <div className="yearbox">
                                     <h2>Yearly Schedules Insight</h2>
                                     <span><a href="#" className="me-4 text-dark addphy" data-bs-toggle="modal" data-bs-target="#addphysicians"><i className="fa fa-plus"></i> <b className='d-none d-lg-inline'>Add Physicians</b></a>
-                                        
                                     </span>
-
                                     <div className="modal smallsize" id="addphysicians">
                                         <div className="modal-dialog">
                                             <div className="modal-content"> 
