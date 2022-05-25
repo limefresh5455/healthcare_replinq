@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import { useLocation } from 'react-router-dom';
 import { useParams } from "react-router-dom"
+import Moment from 'react-moment';
+import moment from 'moment';
 //import { adddDays } from 'date-fns'
 
 const Schedule = () => {
@@ -12,34 +14,38 @@ const Schedule = () => {
   const [scheduledate, setScheduleDate] = useState("");
   const [starttime, setStartTime] = useState("");
   const [endtime, setEndTime] = useState("");
+  const [today, setToday] = useState("");
   let eventObject;
   let resObject;
   useEffect(() => {
 
     eventObject = JSON.parse(localStorage.getItem('event'));
     // console.log(resObject);
-    console.log(eventObject);
+    console.log("schedule=="+JSON.stringify(eventObject));
     // console.log(eventObject.title);
     setName(eventObject.full_name);
     setScheduleDate(eventObject.start_date);
     setStartTime(eventObject.start_time);
     setEndTime(eventObject.end_time);
+    setToday(eventObject.start_date)
   }, []);
 
 
   const { info } = useParams()
-
+  const toUpperCaseFilter = (d) => {
+    return d.toUpperCase();
+}; 
 
   return (
     <>
+    
       <div className="offcanvas offcanvas-start" id="demo">
         <AdminLeftMenu />
       </div>
       <div className="rightpane">
         <div className='container'>
           <div className="row justify-content-center">
-            <h6>Novemeber 22,2020</h6>
-            <p>{ }</p>
+            <h6>{moment(today).format('ll')}</h6>
             <div className="col-md-2 avatarwrap">
               <div className="avname">
                 <h2>SJ</h2>
@@ -122,7 +128,9 @@ const Schedule = () => {
                   <div className="schedule-boxleft">
                     <div className="yearbox" style={{ "background-color": "#F4F1DE", "border-bottom": "0px" }}>
                       <h2>Schedule</h2>
-                      <h2 style={{ "color": "#e28563" }}>Nov, 11 2020</h2>
+                      <h2 style={{ "color": "#e28563" }}>
+                      {moment(today).format('ll')}
+                         </h2>
                       <span><a href="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></a>
                         <a href="#" className="text-black"><i className="fa fa-chevron-right"></i></a></span>
                     </div>
@@ -144,7 +152,7 @@ const Schedule = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="row align-items-center">
+                    {/* <div className="row align-items-center">
                       <div className="col-md-2"><p style={{ "margin-left": "20px" }}>9:00 AM</p></div>
                       <div className="col-md-10">
                         <div className="upschedulebox bdrleft mb-4">
@@ -161,8 +169,8 @@ const Schedule = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="row align-items-center">
+                    </div> */}
+                    {/* <div className="row align-items-center">
                       <div className="col-md-2"><p style={{ "margin-left": "20px" }}>10:00 AM</p></div>
                       <div className="col-md-10">
                         <div className="upschedulebox bdrleft mb-4">
@@ -179,7 +187,7 @@ const Schedule = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

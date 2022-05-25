@@ -65,5 +65,25 @@ class physicianService {
     });
   }
 
+  async AddPhysicianByMr(user) {
+
+    var mr_id = localStorage.getItem('user_id'); 
+    var reference_id = (user.reference_id +"");
+     
+    var user_data = {reference_id, mr_id}
+    return  fetch('http://127.0.0.1:8000/api/doctor-add/', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json+fhir",
+        'Authorization': 'Bearer ' + this.config.access_token,
+      },
+      body: JSON.stringify(user_data)
+    })
+      .then((response) => {
+        return response.json()
+      })
+  }
+
 }
 export default physicianService;

@@ -9,6 +9,7 @@ import Schedule from './Schedule';
 import { Link } from 'react-router-dom';
 import physicianService from '../services/physicianService';
 
+
 let dts = [];
 let resObject = [];
 
@@ -42,21 +43,23 @@ export default class Calendar extends React.Component {
   componentDidMount() {
     const user_id = localStorage.getItem('user_id');
     this.state.physicianService.getPhysicianByMr(user_id).then(res => {
-       resObject = res;
-       localStorage.setItem('alldata', JSON.stringify(res));
-       dts = [];
-        for (let i = 0; i < res.length; i++) {
-          const obj = {
-            id: res[i].id,
-            title: res[i].first_name,
-            start: res[i].start_date
-          }
-          dts.push(obj);
+      resObject = res;
+      console.log("lav" + JSON.stringify(resObject));
+      localStorage.setItem('alldata', JSON.stringify(res));
+      dts = [];
+      for (let i = 0; i < res.length; i++) {
+        console.log("start===" + res[i].start_date)
+        const obj = {
+          id: res[i].id,
+          title: res[i].first_name,
+          start: res[i].start_date
         }
-        this.setState({ calEvent: dts });
-        let todayStr = new Date().toISOString().replace(/T.*$/, '')
-        let k = 0
+        dts.push(obj);
       }
+      this.setState({ calEvent: dts });
+      let todayStr = new Date().toISOString().replace(/T.*$/, '')
+      let k = 0
+    }
     );
   }
 
@@ -111,13 +114,37 @@ export default class Calendar extends React.Component {
 
   handleEventClick = (info) => {
     // window.confirm(info).push({
-    for(let j=0 ; j< resObject.length; j++)
-    { 
-       if(info.event.start_date == resObject[j].start_date)
-       { 
-        localStorage.setItem('event', JSON.stringify(resObject[j])); 
-        break;      
-       }
+    for (let j = 0; j < resObject.length; j++) {
+
+      const date = info.event.start
+
+      let years = date.getFullYear()
+      let month = (date.getMonth() + 1)
+      let day = date.getDate()
+
+      let newMonth;
+
+      let newDay;
+
+      if (month<10) {
+        newMonth = "0" + month
+      }else{
+        newMonth=month
+      }
+
+      if (day<10) {
+        newDay = "0" + day
+      }else{
+        newDay=day
+      }
+
+      let newDate = years + "-" + newMonth + "-" + newDay
+    
+      if (newDate == resObject[j].start_date) {
+        console.log("date==" + newDate + "==" + resObject[j].start_date);
+        localStorage.setItem('event', JSON.stringify(resObject[j]));
+        break;
+      }
     }
     window.location.href = "/schedule/";
     // this.setState({ event: info })

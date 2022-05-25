@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { ToastContainer } from 'react-toastify';
+import toaster from '../helpers/toaster';
 import physicianService from '../services/physicianService';
+const current_token = localStorage.getItem('access_token');
 const Physicians = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [items, setItem] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [searchPhysician, setSearchPhysician] = useState([]);
@@ -43,22 +46,43 @@ const Physicians = () => {
       </>
     )
   }
-  function deleteUser(doctor_id)
+  function deleteUser(doctor_id,e)
   {  
    
     new physicianService().deletePhysicianByMr(doctor_id).then(data => {
-      console.log(data)
+       console.log(data.result);
+       if (data.success === true) {
+        new toaster().successMessage(data.message);
+      } else if (data.success === false) {
+        if (data.message.message) {
+          new toaster().errorMessage(data.message.message);
+        }
+      }
+      
     }
   );
   }
 
-  function AddUser(user)
+  function AddUser(user_data)
   {
-    alert(user.reference_id +"");
+    new physicianService().AddPhysicianByMr(user_data).then(data => {
+
+      console.log(data.result);
+      if (data.success === true) {
+       new toaster().successMessage(data.message);
+     } else if (data.success === false) {
+       if (data.message.message) {
+         new toaster().errorMessage(data.message.message);
+       }
+     }
+    
+    }
+    ); 
   }
 
   return (
     <>
+       <ToastContainer />
       <div className="offcanvas offcanvas-start" id="demo">
         <AdminLeftMenu />
       </div>
@@ -125,7 +149,7 @@ const Physicians = () => {
                             <a href='#' className='a-g-link' 
                             data-bs-toggle="modal" 
                             data-bs-target="#removephysicians"
-                             onClick={()=>deleteUser(user.doctor_id)}
+                            
                             >
                               <i className='fa fa-trash'></i> Remove
                             </a>
@@ -146,17 +170,17 @@ const Physicians = () => {
                                   <span class="warningIcon"><i class="fa fa-exclamation-triangle"></i></span>
                                 </div>
                                 <div className='row text-center'>
-                                  <span><b>Are you sure you want to remove Dr. Sarah Jonas from your profile</b></span>
+                                  <span><b>Are you sure you want to remove Dr. {user.full_name} from your profile</b></span>
                                   <p>
-                                    You will no longer receive notifications for Dr. Sarah Jonas
+                                    You will no longer receive notifications for Dr. {user.full_name}
                                   </p>
                                 </div>
                                 <div className=' row text-center'>
                                   <div className=' col-md-6 text-center'>
-                                    <input type='button' class='btn btn-primary w-100 removebtn' value='Cancel'></input>
+                                    <input type='button' data-bs-dismiss="modal" class='btn btn-primary w-100 removebtn' value='Cancel'></input>
                                   </div>
                                   <div className=' col-md-6 text-center'>
-                                    <input type='button' class='btn btn-primary w-100' value='Confirm'></input>
+                                    <input type='button' data-bs-dismiss="modal" class='btn btn-primary w-100'  onClick={()=>deleteUser(user.doctor_id)} value='Confirm'></input>
                                   </div>
                                 </div>
                               </div>
