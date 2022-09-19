@@ -4,11 +4,15 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { ToastContainer } from 'react-toastify';
 import toaster from '../helpers/toaster';
 import physicianService from '../services/physicianService';
+import { useOutletContext,Link } from "react-router-dom";
+
 const current_token = localStorage.getItem('access_token');
 const Physicians = () => {
+  const [userData] = useOutletContext();
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItem] = useState([]);
   const [searchName, setSearchName] = useState("");
+  const [SearchUserId, setSearchUserId] = useState("");
   const [searchPhysician, setSearchPhysician] = useState([]);
 
   function getPhysicianList() {
@@ -18,9 +22,8 @@ const Physicians = () => {
     );
   }
 
-  const searchPhysicianList = (event) => {
-    event.preventDefault();
-    new physicianService().searchPhysicianList(searchName).then(data => {
+  const searchPhysicianList = () => {
+    new physicianService().searchPhysicianList(searchName,userData.id).then(data => {
         setSearchPhysician(data)
       }
     );
@@ -46,36 +49,40 @@ const Physicians = () => {
       </>
     )
   }
-  function deleteUser(doctor_id,e)
+  function deleteUser(user)
   {  
    
-    new physicianService().deletePhysicianByMr(doctor_id).then(data => {
-       console.log(data.result);
+    new physicianService().deletePhysicianByMr(user).then(data => {
        if (data.success === true) {
+        searchPhysicianList();  
+        setSearchName(user.full_name)
         new toaster().successMessage(data.message);
       } else if (data.success === false) {
         if (data.message.message) {
+    
           new toaster().errorMessage(data.message.message);
         }
-      }
-      
+      }   
     }
   );
   }
 
   function AddUser(user_data)
   {
-    new physicianService().AddPhysicianByMr(user_data).then(data => {
 
-      console.log(data.result);
+    new physicianService().AddPhysicianByMr(user_data).then(data => {
+        //console.log(data.result);
       if (data.success === true) {
+        searchPhysicianList();  
+        setSearchName(user_data.full_name)
        new toaster().successMessage(data.message);
      } else if (data.success === false) {
        if (data.message.message) {
          new toaster().errorMessage(data.message.message);
+
        }
      }
-    
+   
     }
     ); 
   }
@@ -90,7 +97,7 @@ const Physicians = () => {
         <div className="container">
           <div className='row justify-content-center'>
             <div className='col-md-8 text-center'>
-              <img src="\images\physicianHero.png" width={'323'} alt='' />
+              <img src="\images\physicianHero.png" width={'323'} alt='img-test' />
               <h2>Welcome to the Replinq physician portal. Follow the prompts below to add physicians to your profile. Surgeon schedules will then be reflected in your live calendar.</h2>
             </div>
           </div>
@@ -134,7 +141,7 @@ const Physicians = () => {
                   </div>
                   <div class="col-4 col-md-2">
                     <button className='btn btn-physearch' type="button"
-                      onClick={searchPhysicianList} disabled={(searchName != "") ? false : true}>Search</button>
+                     onClick={searchPhysicianList} disabled={(searchName != "") ? false : true}>Search</button>
                   </div>
                 </div>
               {searchPhysician.map((user, index) => (
@@ -142,25 +149,23 @@ const Physicians = () => {
                   <div className='col-md-12'>
                     <div className="upschedulebox m-0">
                       <div className="uphdr">
-                        <div className="dr-name phyname"><b>Dr.{user.full_name}</b> <span className='d-block text-start'>Radiologist</span></div>
-                        {user.reference_id == user.doctor_id ?
+                        <div className="dr-name phyname"><b>Dr.{user.full_name}</b> <span className='d-block text-start'> Radiologist</span></div>
+                        {user.doctor !== null ?
                           <div className="ms-auto">
-                            {console.log(user)}
-                            <a href='#' className='a-g-link' 
+                            <Link to='#' className='a-g-link' 
                             data-bs-toggle="modal" 
-                            data-bs-target="#removephysicians"
-                            
-                            >
+                            data-bs-target="#removephysicians" >
                               <i className='fa fa-trash'></i> Remove
-                            </a>
+                            </Link>
                           </div>
                           :
                           <div className="ms-auto">
-                            <a href='#' className='a-g-link'  onClick={()=>AddUser(user)}>
+                            <Link to='#' className='a-g-link'  onClick={()=>{ AddUser(user)}}>
                               <i className='fa fa-plus'></i> Add to Profile
-                            </a>
+                            </Link>
                           </div>
                         }
+                        {console.log("check condition "+user.doctor)}
                         <div className="modal smallsize" id="removephysicians">
                           <div className="modal-dialog">
                             <div className="modal-content">
@@ -180,7 +185,8 @@ const Physicians = () => {
                                     <input type='button' data-bs-dismiss="modal" class='btn btn-primary w-100 removebtn' value='Cancel'></input>
                                   </div>
                                   <div className=' col-md-6 text-center'>
-                                    <input type='button' data-bs-dismiss="modal" class='btn btn-primary w-100'  onClick={()=>deleteUser(user.doctor_id)} value='Confirm'></input>
+                                    <input type='button' data-bs-dismiss="modal" class='btn btn-primary w-100'  onClick={()=>deleteUser(user)} value='Confirm'></input>
+                                    {/* <button>{JSON.stringify(user)}</button> */}
                                   </div>
                                 </div>
                               </div>

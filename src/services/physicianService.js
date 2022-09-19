@@ -20,8 +20,8 @@ class physicianService {
     });
   }
 
-  async searchPhysicianList(name) {
-    return fetch(this.config.BASE_URL+'/searchepic/'+name,{
+  async searchPhysicianList(name, userId) {
+    return fetch(this.config.BASE_URL+'/searchepic/'+name+'/'+userId,{
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -50,8 +50,8 @@ class physicianService {
     });
   }
 
-  async deletePhysicianByMr(r_id) {
-    return fetch(this.config.BASE_URL+'/delete/'+r_id,{
+  async deletePhysicianByMr(user) {
+    return fetch(this.config.BASE_URL+'/delete/'+user.reference_id+'/'+user.doctor.mr_id,{
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',

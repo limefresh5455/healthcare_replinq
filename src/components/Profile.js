@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import profileService from '../services/profileService';
 import toaster from '../helpers/toaster';
 import Configuration from '../config/config';
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const config = new Configuration();
@@ -128,7 +129,7 @@ const Profile = () => {
                 <h3>{(name) ? name : ''}</h3>
                 <p>Lorem ipsum dolor sit amet.</p>
                 <div className='profileboxfooter'>
-                  <a href='#' onClick={handleClick}>Upload Picture</a>
+                  <Link to='#' onClick={handleClick}>Upload Picture</Link>
                   <input
                     type="file"
                     ref={hiddenFileInput}

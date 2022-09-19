@@ -31,7 +31,7 @@ const Datafetch = () => {
         }).then(response => response.json())
             .then(res => {
 
-                console.log(res);
+                //console.log(res);
                 setResourceType(res[0].doctor_name);
 
 

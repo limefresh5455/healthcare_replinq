@@ -44,7 +44,7 @@ export default class Calendar extends React.Component {
     const user_id = localStorage.getItem('user_id');
     this.state.physicianService.getPhysicianByMr(user_id).then(res => {
       resObject = res;
-      console.log("lav" + JSON.stringify(resObject));
+    //  console.log("lav" + JSON.stringify(resObject));
       localStorage.setItem('alldata', JSON.stringify(res));
       dts = [];
       for (let i = 0; i < res.length; i++) {

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 import authService from '../../services/authService';
 import toaster from '../../helpers/toaster';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +88,7 @@ const Header = () => {
       />
       <nav className="navbar navbar-expand-sm">
         <div className="container">
-          <a className="navbar-brand" href="javascript:void(0)"> <img src="\images\logo.jpg" width={'100'} alt="" /></a>
+          <Link className="navbar-brand" to="javascript:void(0)"> <img src="\images\logo.jpg" width={'100'} alt="test" /></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span className="navbar-toggler-icon"></span>
             <span className="navbar-toggler-icon"></span>
@@ -96,13 +97,13 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="mynavbar">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/">Home</a>
+                <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#aboutus">About Us</a>
+                <Link className="nav-link" to="#aboutus">About Us</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#contactus">Contact Us</a>
+                <Link className="nav-link" to="#contactus">Contact Us</Link>
               </li>
             </ul>
           </div>
@@ -161,13 +162,13 @@ const Header = () => {
                               </label>
                             </div>
                             <div className='col mb-4'>
-                              <a href='#' className='float-right'>Forget Password</a>
+                              <Link to='#' className='float-right'>Forget Password</Link>
                             </div>
                             <div className='col-12'>
                               <input type='submit' disabled={isLoading} className='btn btn-primary' value='Login'></input>
                             </div>
                             <div className='col-12 mt-4 mb-4 text-center'>
-                              Don't have an account <a data-bs-toggle="modal" data-bs-target="#ModalRegistration" href='#' className='text-underline'>Sign Up</a>
+                              Don't have an account <Link data-bs-toggle="modal" data-bs-target="#ModalRegistration" to='#' className='text-underline'>Sign Up</Link>
                             </div>
                           </div>
                         </form>
@@ -352,7 +353,7 @@ const Header = () => {
                             <input type='submit' disabled={isLoading} className='btn btn-primary' value='Sign Up' />
                           </div>
                           <div className='col-12 mt-2 mb-2 text-center'>
-                            Already have an account <a href='#' data-bs-toggle="modal" data-bs-target="#mylogin" className='text-underline'>Login</a>
+                            Already have an account <Link to='#' data-bs-toggle="modal" data-bs-target="#mylogin" className='text-underline'>Login</Link>
                           </div>
                         </div>
                       </form>

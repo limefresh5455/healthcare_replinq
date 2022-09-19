@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
 import { useLocation } from 'react-router-dom';
-import { useParams } from "react-router-dom"
+import { useParams,Link } from "react-router-dom"
 import Moment from 'react-moment';
 import moment from 'moment';
 //import { adddDays } from 'date-fns'
@@ -49,14 +49,14 @@ const Schedule = () => {
             <div className="col-md-2 avatarwrap">
               <div className="avname">
                 <h2>SJ</h2>
-                <span className="avedit"> <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i className="fa fa-pencil"></i></a></span>
+                <span className="avedit"> <Link to='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i className="fa fa-pencil"></i></Link></span>
               </div>
               <h6 className='text-center' for="disabledFieldsetCheck">Dr. {name}</h6>
             </div>
             {/* <div className="col-md-2 avatarwrap">
               <div className="avname1">
                 <h2>SJ</h2>
-                <span class="avedit"> <a href='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i class="fa fa-pencil"></i></a></span>
+                <span class="avedit"> <Link to='#' className='a-g-link' data-bs-toggle="modal" data-bs-target="#removephysicians"><i class="fa fa-pencil"></i></Link></span>
               </div>
               <h6 className='text-center' for="disabledFieldsetCheck">Dr. Sarah Jonas</h6>
             </div> */}
@@ -69,8 +69,8 @@ const Schedule = () => {
                     <div className='row'>
                       <div className='modalWrap'>
                         <div className='removehdr'>
-                          <a href='#' className='active'>Color</a>
-                          <a href='#'>Notifications</a>
+                          <Link to='#' className='active'>Color</Link>
+                          <Link to='#'>Notifications</Link>
                         </div>
                         <div className='addmodalbdy'>
                           <h4>Physician</h4>
@@ -131,8 +131,8 @@ const Schedule = () => {
                       <h2 style={{ "color": "#e28563" }}>
                       {moment(today).format('ll')}
                          </h2>
-                      <span><a href="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></a>
-                        <a href="#" className="text-black"><i className="fa fa-chevron-right"></i></a></span>
+                      <span><Link to="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></Link>
+                        <Link to="#" className="text-black"><i className="fa fa-chevron-right"></i></Link></span>
                     </div>
                     <div className="row align-items-center">
                       <div className="col-md-2"><p style={{ "margin-left": "20px" }}>{starttime} AM</p></div>

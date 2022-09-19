@@ -5,7 +5,7 @@ class adminService {
   constructor() {
     this.config = new Configuration();
   }
-
+ 
   async getAdminList() {
     return fetch(this.config.BASE_URL + '/listepic', {
       method: 'GET',

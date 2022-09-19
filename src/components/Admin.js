@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminLeftMenu from './backend/AdminLeftMenu';
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext,Link } from "react-router-dom";
 import adminService from '../services/adminService';
 const Admin = (props) => {
     const [userData] = useOutletContext();
@@ -9,7 +9,7 @@ const Admin = (props) => {
     function getAdminList() {
         new adminService().getAdminList().then(data => {
             setItem(data)
-            console.log("lavvv" + JSON.stringify(items))
+           // console.log("lavvv" + JSON.stringify(items))
         }
         );
     }
@@ -31,7 +31,7 @@ const Admin = (props) => {
                     <div className="welcombox">
                         <div className="row align-items-center">
                             <div className="col-md-6">
-                                <h1 className="mt-4">Hey {(userData) ? userData.name : ''}, Good Morning <img src="/images/sunimg.png" /></h1>
+                                <h1 className="mt-4">Hey {(userData) ? userData.name : ''}, Good Morning <img src="/images/sunimg.png" alt="imgess" /></h1>
                                 <h2>Welcome to your Replinq dashboard. View case insights below, edit your physicians and preview your next upcoming case.
                                 </h2>
                                 <h3>
@@ -39,7 +39,7 @@ const Admin = (props) => {
                                 </h3>
                             </div>
                             <div className="col-md-6 text-end">
-                                <img src="/images/welcomeImg.png" />
+                                <img src="/images/welcomeImg.png" alt="img" />
                             </div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@ const Admin = (props) => {
                                     <div className="schedule-boxleft">
                                         <div className="yearbox">
                                             <h2>My Physicians (5)</h2>
-                                            <span><a href="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></a>
-                                                <a href="#" className="text-black"><i className="fa fa-chevron-right"></i></a></span>
+                                            <span><Link to="#" className="me-4 text-dark"><i className="fa fa-chevron-left"></i></Link>
+                                                <Link to="#" className="text-black"><i className="fa fa-chevron-right"></i></Link></span>
                                         </div>
-                                        <img src="/images/year-chart-left.png" />
+                                        <img src="/images/year-chart-left.png" alt="imge" />
                                         <div className="yearboxfooter">
                                             <span></span> Physicians
                                             <span></span> My Schedules
@@ -94,10 +94,10 @@ const Admin = (props) => {
                                 <div className="yearbox">
                                     <h2>Yearly Schedules Insight</h2>
                                     <span>
-                                        <a href="#" className="me-4 text-dark addphy" data-bs-toggle="modal" data-bs-target="#addphysicians">
+                                        <Link to="#" className="me-4 text-dark addphy" data-bs-toggle="modal" data-bs-target="#addphysicians">
                                             <i className="fa fa-plus"></i>
                                             <b className='d-none d-lg-inline'>Add Physicians</b>
-                                        </a>
+                                        </Link>
                                     </span>
                                     <div className="modal smallsize" id="addphysicians">
                                         <div className="modal-dialog">
@@ -119,7 +119,7 @@ const Admin = (props) => {
                                                             </div>
 
                                                             <div className='addmodalhero'>
-                                                                <img src="/images/add-physician-hero.png" width={292} />
+                                                                <img src="/images/add-physician-hero.png" alt="imgg" width={292} />
                                                                 <h3>Choose a Color</h3>
                                                                 <p>
                                                                     Select a color to help you identify the physician throughout the app
@@ -182,12 +182,13 @@ const Admin = (props) => {
                                 <ul className="list-group addphylist">
                                     {
                                         items.map((employee) => {
-                                            console.log("kush----" + employee.full_name);
+                                            //console.log("lav admin page " + JSON.stringify(employee));
+                                            console.log("check id login"+JSON.stringify(userData.id));
                                             return (
                                                 <>
                                                     <li className="list-group-item d-flex justify-content-between align-items-top">
                                                         <b><small className='dotdr orng'></small> Dr.{employee.full_name}<span className='drspec'>Radiologist</span></b>
-                                                        <a href='#'><span className="badge"><i className="fa fa-pencil"></i></span></a>
+                                                        <Link to='#'><span className="badge"><i className="fa fa-pencil"></i></span></Link>
 
                                                     </li>
                                                     <li className='list-group-item'>
