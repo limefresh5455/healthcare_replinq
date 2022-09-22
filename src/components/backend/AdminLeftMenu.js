@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import authService from '../../services/authService';
 
 const AdminLeftMenu = () => {
@@ -21,36 +21,36 @@ const AdminLeftMenu = () => {
             <div className="offcanvas-body leftmenuwrap">
                 <ul>
                     <li>
-                        <Link to="/calendar">
-                            <h4> <i className='fa fa-user-md'></i> Calendar</h4>
-                        </Link>
+                        <NavLink to="/calendar" activeClassName="active">
+                            <i className='fa fa-user-md'></i> Calendar
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/physicians">
-                            <h4> <i className='fa fa-user-md'></i> Physicians</h4>
-                        </Link>
+                        <NavLink to="/physicians" activeClassName="active">
+                            <i className='fa fa-user-md'></i> Physicians
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/admin">
-                            <h4><i className='fa fa-dashboard'></i> Dashboard</h4>
-                        </Link>
+                        <NavLink to="/admin" activeClassName="active">
+                            <i className='fa fa-dashboard'></i> Dashboard
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/notification">
-                            <h4><i className='fa fa-bell'></i> Notifications</h4>
-                        </Link>
+                        <NavLink to="/notification" activeClassName="active">
+                            <i className='fa fa-bell'></i> Notifications
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/profile">
-                            <h4><i className='fa fa-user'></i> Profile</h4>
-                        </Link>
+                        <NavLink to="/profile">
+                            <i className='fa fa-user'></i> Profile
+                        </NavLink>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <Link to='#'>
+                        <NavLink to='#'>
                             <h4 onClick={Logout}><i className='fa fa-sign-out'></i> Logout</h4>
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </div>
