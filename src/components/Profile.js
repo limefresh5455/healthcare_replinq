@@ -7,9 +7,10 @@ import toaster from '../helpers/toaster';
 import Configuration from '../config/config';
 import { Link } from "react-router-dom";
 
+
 const Profile = () => {
   const config = new Configuration();
-  const { register, handleSubmit, getValues, formState: { errors } } = useForm();
+  const { register, handleSubmit, getValues, setValue, formState: { errors } } = useForm();
   const {
     register: register2,
     formState: { errors: errors2 },
@@ -17,29 +18,24 @@ const Profile = () => {
     getValues: getValues2
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [name, setName] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [phone, setPhoneNumber] = useState("");
   const [images, setImages] = useState("");
   const [old_password, setOldPassword] = useState("");
   const [new_password, setNewPassword] = useState("");
   const [cnfirm_psd, setCnPassword] = useState("");
   const [sendImage, setSendImage] = useState("");
   const hiddenFileInput = React.useRef();
+
   const getProfileData = () => {
     new profileService().getProfileData().then(res => {
-        setName(res.data.name);
-        setEmail(res.data.email);
-        setFirstname(res.data.first_name);
-        setLastName(res.data.last_name);
-        setPhoneNumber(res.data.phone_no);
-        setImages(res.data.images);
-        setId(res.data.id);
-        localStorage.setItem('user_name', res.data.name);
-      }
+      setName(res.data.name);
+      setImages(res.data.images);
+      setId(res.data.id);
+      localStorage.setItem('user_name', res.data.name);
+      const fields = ['first_name', 'last_name', 'email', 'phone_no'];
+      fields.forEach(field => setValue(field, res.data[field]));
+    }
     );
   }
 
@@ -51,16 +47,16 @@ const Profile = () => {
     const bodyFormData = new FormData();
     bodyFormData.append('images', hiddenFileInput.current.files[0]);
     new profileService().updateImage(bodyFormData, id).then(data => {
-        if (data.success === true) {
-          setImages(data.image);
-          localStorage.setItem('user_image', data.image);
-          new toaster().successMessage(data.message);
-        } else if (data.success === false) {
-          if (data.message.message) {
-            new toaster().errorMessage(data.message.message);
-          }
+      if (data.success === true) {
+        setImages(data.image);
+        localStorage.setItem('user_image', data.image);
+        new toaster().successMessage(data.message);
+      } else if (data.success === false) {
+        if (data.message.message) {
+          new toaster().errorMessage(data.message.message);
         }
       }
+    }
     );
   };
 
@@ -71,37 +67,39 @@ const Profile = () => {
   async function updateProfile(data, e) {
     setIsLoading(!isLoading);
     new profileService().updateProfile(data, id).then(data => {
-        if (data.success === true) {
-          setIsLoading(isLoading);
-          new toaster().successMessage(data.message);
-          e.target.reset();
-        } else if (data.success === false) {
-          setIsLoading(false);
-          if (data.message.email) {
-            new toaster().errorMessage(data.message.email[0]);
-          }
+      if (data.success === true) {
+        setIsLoading(isLoading);
+        getProfileData();
+        new toaster().successMessage(data.message);
+        e.target.reset();
+      } else if (data.success === false) {
+        setIsLoading(false);
+        if (data.message.email) {
+          new toaster().errorMessage(data.message.email[0]);
         }
       }
+    }
     );
   };
- 
+
   async function changepassword(data, e) {
     new profileService().changePassword(data).then(data => {
-        if (data.success === true) {
-          e.target.reset();
-          new toaster().successMessage(data.message);
-        } else if (data.success === false) {
-          if (data.message) {
-            new toaster().errorMessage(data.message);
-          }
+      if (data.success === true) {
+        e.target.reset();
+        new toaster().successMessage(data.message);
+      } else if (data.success === false) {
+        if (data.message) {
+          new toaster().errorMessage(data.message);
         }
       }
-    );   
+    }
+    );
   };
+
 
   return (
     <>
-     <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -134,7 +132,7 @@ const Profile = () => {
                     type="file"
                     ref={hiddenFileInput}
                     onChange={handleChange}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                   />
                 </div>
               </div>
@@ -146,28 +144,26 @@ const Profile = () => {
                   <p>The information can be edited</p>
                 </div>
                 <div className='prorightform bdy'>
-                  <form  onSubmit={handleSubmit(updateProfile)}>
+                  <form onSubmit={handleSubmit(updateProfile)}>
                     <div class="row">
                       <div class="col">
-                        <input type="text" class="form-control" 
+                        <input type="text" class="form-control"
                           {...register("first_name", {
                             required: "First Name is required"
                           })}
                           placeholder="First Name*"
-                          name="first_name" 
+                          name="first_name"
                           id="first_name"
-                          defaultValue={firstname}
-                         />
-                         {errors.first_name ? (
-                            <>
-                              {errors.first_name.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors.first_name.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null}      
-                        {/* <small className='smalltext'>Please specify the first name</small> */}
+                        />
+                        {errors.first_name ? (
+                          <>
+                            {errors.first_name.type === "required" && (
+                              <p className="errorMessage">
+                                {errors.first_name.message}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
                       </div>
                       <div class="col">
                         <input type="text" class="form-control"
@@ -175,19 +171,18 @@ const Profile = () => {
                             required: "Last Name is required"
                           })}
                           placeholder="Last Name*"
-                          name="last_name" 
-                          id="last_name" 
-                          defaultValue={lastname}
-                          />
-                          {errors.last_name ? (
-                            <>
-                              {errors.last_name.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors.last_name.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null}
+                          name="last_name"
+                          id="last_name"
+                        />
+                        {errors.last_name ? (
+                          <>
+                            {errors.last_name.type === "required" && (
+                              <p className="errorMessage">
+                                {errors.last_name.message}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
                       </div>
                     </div>
                     <div class="row mt-4">
@@ -202,24 +197,22 @@ const Profile = () => {
                           })}
                           placeholder="Email*"
                           name="email"
-                          defaultValue={email}
-                          />
-                          <span className="inpicrgt"><i className='fa fa-envelope'></i></span>
-                          {errors.email ? (
-                            <>
-                              {errors.email.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors.email.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null} 
+                        />
+                        <span className="inpicrgt"><i className='fa fa-envelope'></i></span>
+                        {errors.email ? (
+                          <>
+                            {errors.email.type === "required" && (
+                              <p className="errorMessage">
+                                {errors.email.message}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
                       </div>
                       <div class="col">
-                        <input type="number" class="form-control" 
+                        <input type="number" class="form-control"
                           placeholder="Phone Number"
                           name="phone_no"
-                          defaultValue={phone}
                           {...register("phone_no", {
                             required: "Phone is required"
                           })} />
@@ -236,7 +229,7 @@ const Profile = () => {
                     </div>
                     <div className='prorightform ftr  mt-4'>
                       <input type='submit' disabled={isLoading} className='btn btn-primary' value='Save Changes'></input>
-                    </div> 
+                    </div>
                   </form>
                 </div>
               </div>
@@ -249,25 +242,25 @@ const Profile = () => {
                   <form onSubmit={handleSubmit2(changepassword)} >
                     <div class="row justify-content-center gap-4">
                       <div class="col-6">
-                           <div class="position-relative">
-                              <input type="password"
-                          class="form-control"
-                           {...register2("old_password", {
-                            required: "old_password is required"
-                          })} 
-                          placeholder="Current Password" name='old_password'
+                        <div class="position-relative">
+                          <input type="password"
+                            class="form-control"
+                            {...register2("old_password", {
+                              required: "old_password is required"
+                            })}
+                            placeholder="Current Password" name='old_password'
                           />
                           <span className="inpicrgtpws old-pass"><i className='fa fa-lock'></i></span>
-                           </div>
-                          {errors2.old_password ? (
-                            <>
-                              {errors2.old_password.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors2.old_password.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null}
+                        </div>
+                        {errors2.old_password ? (
+                          <>
+                            {errors2.old_password.type === "required" && (
+                              <p className="errorMessage">
+                                {errors2.old_password.message}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
                       </div>
                       <div class="col-6">
                         <input type="password"
@@ -278,22 +271,22 @@ const Profile = () => {
                             required: "New password is required"
                           })}
                           autocomplete="off"
-                           />
-                          {errors2.password ? (
-                            <>
-                              {errors2.password.type === "required" && (
-                                <p className="errorMessage">
-                                  {errors2.password.message}
-                                </p>
-                              )}
-                            </>
-                          ) : null} 
+                        />
+                        {errors2.password ? (
+                          <>
+                            {errors2.password.type === "required" && (
+                              <p className="errorMessage">
+                                {errors2.password.message}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
                       </div>
                       <div class="col-6">
                         <input type="password"
-                         class="form-control"
-                         placeholder="Re-Type New"
-                         name="confirm_password" 
+                          class="form-control"
+                          placeholder="Re-Type New"
+                          name="confirm_password"
                           {...register2("confirm_password", {
                             required: "Please confirm password!",
                             validate: {
@@ -303,13 +296,13 @@ const Profile = () => {
                               }
                             }
                           })}
-                         autocomplete="off"
-                         />
-                         {errors2.confirm_password && (
+                          autocomplete="off"
+                        />
+                        {errors2.confirm_password && (
                           <p className="errorMessage">
                             {errors2.confirm_password.message}
                           </p>
-                         )}
+                        )}
                       </div>
                       <div className='prorightform ftr'>
                         <button className='btn btn-primary' type="submit">Update Password</button>
@@ -322,10 +315,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
     </>
-
-
   )
 };
 
